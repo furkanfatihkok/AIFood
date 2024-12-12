@@ -20,7 +20,7 @@ final class TitleLabel: UILabel {
     init(text: String, style: LabelStyle) {
         super.init(frame: .zero)
         self.text = text
-        self.textAlignment = .center
+        self.textAlignment = .left
         self.numberOfLines = 0
         
         switch style {
@@ -32,10 +32,13 @@ final class TitleLabel: UILabel {
             self.textColor = .darkGray
         case .email:
             self.font = Constants.Fonts.interMedium(size: 14)
+            self.textColor = .black
         case .password:
             self.font = Constants.Fonts.interMedium(size: 14)
+            self.textColor = .black
         case .footer:
             self.font = Constants.Fonts.interMedium(size: 14)
+            self.textColor = .black
         }
     }
     

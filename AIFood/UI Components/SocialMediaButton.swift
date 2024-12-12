@@ -27,9 +27,7 @@ final class SocialMediaButton: UIButton {
     init(type: SocialMediaType) {
         self.type = type
         super.init(frame: .zero)
-        self.layer.cornerRadius = 8
-        self.backgroundColor = .darkGray
-        self.clipsToBounds = true
+        setupButtonAppearance()
         
         switch type {
         case .google:
@@ -45,14 +43,11 @@ final class SocialMediaButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc private func buttonTapped() {
-        switch type {
-        case .google:
-            delegate?.didTapGoogleButton()
-        case .facebook:
-            delegate?.didTapFacebookButton()
-        case .apple:
-            delegate?.didTapAppleButton()
-        }
+    private func setupButtonAppearance() {
+        self.layer.cornerRadius = 20
+        self.layer.borderWidth = 1 // Border genişliği
+        self.layer.borderColor = UIColor.lightGray.cgColor // Gri renk
+        self.backgroundColor = .clear
+        self.clipsToBounds = true
     }
 }
