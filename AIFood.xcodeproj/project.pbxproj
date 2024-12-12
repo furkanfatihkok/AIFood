@@ -13,8 +13,16 @@
 		02E109422D0861B6008D01F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 02E109412D0861B6008D01F5 /* Assets.xcassets */; };
 		02E109452D0861B6008D01F5 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 02E109442D0861B6008D01F5 /* Base */; };
 		02E109532D0976DF008D01F5 /* OnboardingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109522D0976DF008D01F5 /* OnboardingModel.swift */; };
-		02E109562D09770F008D01F5 /* OnboardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109552D09770F008D01F5 /* OnboardingCell.swift */; };
 		02E109582D097766008D01F5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109572D097766008D01F5 /* LoginViewController.swift */; };
+		02E1095B2D0980B1008D01F5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 02E1095A2D0980B1008D01F5 /* SnapKit */; };
+		02E109652D09CC78008D01F5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109642D09CC78008D01F5 /* Constants.swift */; };
+		02E1096C2D0AC453008D01F5 /* SlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1096B2D0AC453008D01F5 /* SlideView.swift */; };
+		02E1096F2D0AC56B008D01F5 /* OnboardingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1096E2D0AC56B008D01F5 /* OnboardingButton.swift */; };
+		02E109712D0AC58B008D01F5 /* OnboardingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109702D0AC58B008D01F5 /* OnboardingLabel.swift */; };
+		02E109732D0ACCC4008D01F5 /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02E109722D0ACCC4008D01F5 /* Inter-Bold.ttf */; };
+		02E109752D0ACCD4008D01F5 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02E109742D0ACCD4008D01F5 /* Inter-Light.ttf */; };
+		02E109772D0ACCE2008D01F5 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02E109762D0ACCE2008D01F5 /* Inter-Regular.ttf */; };
+		02E109792D0ACCEF008D01F5 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02E109782D0ACCEF008D01F5 /* Inter-SemiBold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +34,15 @@
 		02E109442D0861B6008D01F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		02E109462D0861B6008D01F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		02E109522D0976DF008D01F5 /* OnboardingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingModel.swift; sourceTree = "<group>"; };
-		02E109552D09770F008D01F5 /* OnboardingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCell.swift; sourceTree = "<group>"; };
 		02E109572D097766008D01F5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		02E109642D09CC78008D01F5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		02E1096B2D0AC453008D01F5 /* SlideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideView.swift; sourceTree = "<group>"; };
+		02E1096E2D0AC56B008D01F5 /* OnboardingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingButton.swift; sourceTree = "<group>"; };
+		02E109702D0AC58B008D01F5 /* OnboardingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLabel.swift; sourceTree = "<group>"; };
+		02E109722D0ACCC4008D01F5 /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		02E109742D0ACCD4008D01F5 /* Inter-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.ttf"; sourceTree = "<group>"; };
+		02E109762D0ACCE2008D01F5 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		02E109782D0ACCEF008D01F5 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02E1095B2D0980B1008D01F5 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +78,8 @@
 			children = (
 				02E1094C2D08623F008D01F5 /* Application */,
 				02E1094D2D086261008D01F5 /* Resources */,
+				02E1096D2D0AC515008D01F5 /* UI Components */,
+				02E109632D09CC67008D01F5 /* Constants */,
 				02E109512D0976CA008D01F5 /* Model */,
 				02E1094E2D08628B008D01F5 /* Modules */,
 			);
@@ -82,6 +100,7 @@
 		02E1094D2D086261008D01F5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				02E109662D09CE13008D01F5 /* Font */,
 				02E109412D0861B6008D01F5 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -100,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				02E1093C2D0861B5008D01F5 /* OnboardingViewController.swift */,
-				02E109542D0976F6008D01F5 /* Cell */,
+				02E1096B2D0AC453008D01F5 /* SlideView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -121,12 +140,32 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		02E109542D0976F6008D01F5 /* Cell */ = {
+		02E109632D09CC67008D01F5 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				02E109552D09770F008D01F5 /* OnboardingCell.swift */,
+				02E109642D09CC78008D01F5 /* Constants.swift */,
 			);
-			path = Cell;
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		02E109662D09CE13008D01F5 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				02E109722D0ACCC4008D01F5 /* Inter-Bold.ttf */,
+				02E109742D0ACCD4008D01F5 /* Inter-Light.ttf */,
+				02E109762D0ACCE2008D01F5 /* Inter-Regular.ttf */,
+				02E109782D0ACCEF008D01F5 /* Inter-SemiBold.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		02E1096D2D0AC515008D01F5 /* UI Components */ = {
+			isa = PBXGroup;
+			children = (
+				02E1096E2D0AC56B008D01F5 /* OnboardingButton.swift */,
+				02E109702D0AC58B008D01F5 /* OnboardingLabel.swift */,
+			);
+			path = "UI Components";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,6 +184,9 @@
 			dependencies = (
 			);
 			name = AIFood;
+			packageProductDependencies = (
+				02E1095A2D0980B1008D01F5 /* SnapKit */,
+			);
 			productName = AIFood;
 			productReference = 02E109352D0861B5008D01F5 /* AIFood.app */;
 			productType = "com.apple.product-type.application";
@@ -173,6 +215,9 @@
 				Base,
 			);
 			mainGroup = 02E1092C2D0861B5008D01F5;
+			packageReferences = (
+				02E109592D0980B1008D01F5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 02E109362D0861B5008D01F5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -187,7 +232,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02E109792D0ACCEF008D01F5 /* Inter-SemiBold.ttf in Resources */,
+				02E109732D0ACCC4008D01F5 /* Inter-Bold.ttf in Resources */,
+				02E109772D0ACCE2008D01F5 /* Inter-Regular.ttf in Resources */,
 				02E109422D0861B6008D01F5 /* Assets.xcassets in Resources */,
+				02E109752D0ACCD4008D01F5 /* Inter-Light.ttf in Resources */,
 				02E109452D0861B6008D01F5 /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,9 +250,12 @@
 			files = (
 				02E109582D097766008D01F5 /* LoginViewController.swift in Sources */,
 				02E109532D0976DF008D01F5 /* OnboardingModel.swift in Sources */,
-				02E109562D09770F008D01F5 /* OnboardingCell.swift in Sources */,
 				02E1093D2D0861B5008D01F5 /* OnboardingViewController.swift in Sources */,
+				02E109712D0AC58B008D01F5 /* OnboardingLabel.swift in Sources */,
+				02E1096F2D0AC56B008D01F5 /* OnboardingButton.swift in Sources */,
+				02E109652D09CC78008D01F5 /* Constants.swift in Sources */,
 				02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */,
+				02E1096C2D0AC453008D01F5 /* SlideView.swift in Sources */,
 				02E1093B2D0861B5008D01F5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +469,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		02E109592D0980B1008D01F5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		02E1095A2D0980B1008D01F5 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02E109592D0980B1008D01F5 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 02E1092D2D0861B5008D01F5 /* Project object */;
 }
