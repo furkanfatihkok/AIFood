@@ -28,5 +28,8 @@ struct Constants {
         static func interLight(size: CGFloat) -> UIFont? {
             return UIFont(name: "Inter-Light", size: size)
         }
+        static func interMedium(size: CGFloat) -> UIFont? {
+            return UIFont(name: "Inter-Medium", size: size)
+        }
     }
 }
