@@ -19,9 +19,7 @@ final class TitleLabel: UILabel {
     
     init(text: String, style: LabelStyle) {
         super.init(frame: .zero)
-        self.text = text
-        self.textAlignment = .left
-        self.numberOfLines = 0
+        setupLabelAppearance(text: text)
         
         switch style {
         case .title:
@@ -44,5 +42,11 @@ final class TitleLabel: UILabel {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupLabelAppearance(text: String) {
+        self.text = text
+        self.textAlignment = .left
+        self.numberOfLines = 0
     }
 }

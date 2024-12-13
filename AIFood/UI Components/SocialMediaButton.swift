@@ -44,10 +44,22 @@ final class SocialMediaButton: UIButton {
     }
     
     private func setupButtonAppearance() {
-        self.layer.cornerRadius = 20
-        self.layer.borderWidth = 1 // Border genişliği
-        self.layer.borderColor = UIColor.lightGray.cgColor // Gri renk
+        self.layer.cornerRadius = 25
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.lightGray.cgColor
         self.backgroundColor = .clear
         self.clipsToBounds = true
+        self.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    }
+    
+    @objc private func buttonTapped() {
+        switch type {
+        case .google:
+            delegate?.didTapGoogleButton()
+        case .facebook:
+            delegate?.didTapFacebookButton()
+        case .apple:
+            delegate?.didTapAppleButton()
+        }
     }
 }

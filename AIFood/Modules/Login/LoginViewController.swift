@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-#warning("keybord açılınca ekrana tıklanınca kapansın extension yaz.")
+#warning("signIn button keyboard üstüne çıksın.")
 
 final class LoginViewController: UIViewController {
     
@@ -79,13 +79,16 @@ final class LoginViewController: UIViewController {
     }()
     
     private lazy var registerButton: ActionButton = {
-        return ActionButton(title: "Register", type: .register)
+        let button = ActionButton(title: "Register", type: .register)
+        button.delegate = self
+        return button
     }()
     
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        hideKeyboardWhenTapped()
     }
     
     // MARK:- Setup Views
@@ -124,7 +127,7 @@ final class LoginViewController: UIViewController {
         }
         
         emailTextField.snp.makeConstraints { make in
-            make.top.equalTo(emailLabel.snp.bottom).offset(verticalSpacing)
+            make.top.equalTo(emailLabel.snp.bottom).offset(verticalSpacing / 2)
             make.leading.equalToSuperview().offset(horizontalMargin)
             make.trailing.equalToSuperview().offset(-horizontalMargin)
             make.height.equalTo(52)
@@ -136,7 +139,7 @@ final class LoginViewController: UIViewController {
         }
         
         passwordTextField.snp.makeConstraints { make in
-            make.top.equalTo(passwordLabel.snp.bottom).offset(verticalSpacing)
+            make.top.equalTo(passwordLabel.snp.bottom).offset(verticalSpacing / 2)
             make.leading.equalToSuperview().offset(horizontalMargin)
             make.trailing.equalToSuperview().offset(-horizontalMargin)
             make.height.equalTo(52)
@@ -148,22 +151,22 @@ final class LoginViewController: UIViewController {
         }
         
         signInButton.snp.makeConstraints { make in
-            make.top.equalTo(forgotPassword.snp.bottom).offset(verticalSpacing * 2)
+            make.top.equalTo(forgotPassword.snp.bottom).offset(verticalSpacing)
             make.leading.equalToSuperview().offset(horizontalMargin)
             make.trailing.equalToSuperview().offset(-horizontalMargin)
             make.height.equalTo(52)
         }
         
         orSignInWithLabel.snp.makeConstraints { make in
-            make.top.equalTo(signInButton.snp.bottom).offset(verticalSpacing * 2)
+            make.top.equalTo(signInButton.snp.bottom).offset(verticalSpacing)
             make.centerX.equalToSuperview()
         }
         
         socialButtonStackView.snp.makeConstraints { make in
-            make.top.equalTo(orSignInWithLabel.snp.bottom).offset(20)
+            make.top.equalTo(orSignInWithLabel.snp.bottom).offset(verticalSpacing)
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
-            make.height.equalTo(40)
+            make.height.equalTo(50)
         }
         
         footerLabel.snp.makeConstraints { make in
