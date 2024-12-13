@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		026144F32D0C07CA0047996E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026144F22D0C07CA0047996E /* UIViewController.swift */; };
+		026144F52D0C124C0047996E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026144F42D0C124C0047996E /* String.swift */; };
 		02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109382D0861B5008D01F5 /* AppDelegate.swift */; };
 		02E1093B2D0861B5008D01F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */; };
 		02E1093D2D0861B5008D01F5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1093C2D0861B5008D01F5 /* OnboardingViewController.swift */; };
@@ -23,9 +25,16 @@
 		02E109752D0ACCD4008D01F5 /* Inter-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02E109742D0ACCD4008D01F5 /* Inter-Light.ttf */; };
 		02E109772D0ACCE2008D01F5 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02E109762D0ACCE2008D01F5 /* Inter-Regular.ttf */; };
 		02E109792D0ACCEF008D01F5 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02E109782D0ACCEF008D01F5 /* Inter-SemiBold.ttf */; };
+		02E1097B2D0AF91E008D01F5 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1097A2D0AF91E008D01F5 /* AuthTextField.swift */; };
+		02E1097E2D0AF9B2008D01F5 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1097D2D0AF9B2008D01F5 /* ActionButton.swift */; };
+		02E109832D0AFEFA008D01F5 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109822D0AFEFA008D01F5 /* TitleLabel.swift */; };
+		02E109872D0B01BD008D01F5 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02E109862D0B01BD008D01F5 /* Inter-Medium.ttf */; };
+		02E109892D0B0B4A008D01F5 /* SocialMediaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109882D0B0B4A008D01F5 /* SocialMediaButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		026144F22D0C07CA0047996E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		026144F42D0C124C0047996E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		02E109352D0861B5008D01F5 /* AIFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02E109382D0861B5008D01F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +52,11 @@
 		02E109742D0ACCD4008D01F5 /* Inter-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Light.ttf"; sourceTree = "<group>"; };
 		02E109762D0ACCE2008D01F5 /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
 		02E109782D0ACCEF008D01F5 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		02E1097A2D0AF91E008D01F5 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
+		02E1097D2D0AF9B2008D01F5 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
+		02E109822D0AFEFA008D01F5 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		02E109862D0B01BD008D01F5 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		02E109882D0B0B4A008D01F5 /* SocialMediaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +71,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		026144F12D0C07790047996E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				026144F22D0C07CA0047996E /* UIViewController.swift */,
+				026144F42D0C124C0047996E /* String.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		02E1092C2D0861B5008D01F5 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +101,7 @@
 			children = (
 				02E1094C2D08623F008D01F5 /* Application */,
 				02E1094D2D086261008D01F5 /* Resources */,
+				026144F12D0C07790047996E /* Extensions */,
 				02E1096D2D0AC515008D01F5 /* UI Components */,
 				02E109632D09CC67008D01F5 /* Constants */,
 				02E109512D0976CA008D01F5 /* Model */,
@@ -151,6 +175,7 @@
 		02E109662D09CE13008D01F5 /* Font */ = {
 			isa = PBXGroup;
 			children = (
+				02E109862D0B01BD008D01F5 /* Inter-Medium.ttf */,
 				02E109722D0ACCC4008D01F5 /* Inter-Bold.ttf */,
 				02E109742D0ACCD4008D01F5 /* Inter-Light.ttf */,
 				02E109762D0ACCE2008D01F5 /* Inter-Regular.ttf */,
@@ -164,6 +189,10 @@
 			children = (
 				02E1096E2D0AC56B008D01F5 /* OnboardingButton.swift */,
 				02E109702D0AC58B008D01F5 /* OnboardingLabel.swift */,
+				02E109822D0AFEFA008D01F5 /* TitleLabel.swift */,
+				02E1097A2D0AF91E008D01F5 /* AuthTextField.swift */,
+				02E1097D2D0AF9B2008D01F5 /* ActionButton.swift */,
+				02E109882D0B0B4A008D01F5 /* SocialMediaButton.swift */,
 			);
 			path = "UI Components";
 			sourceTree = "<group>";
@@ -236,6 +265,7 @@
 				02E109732D0ACCC4008D01F5 /* Inter-Bold.ttf in Resources */,
 				02E109772D0ACCE2008D01F5 /* Inter-Regular.ttf in Resources */,
 				02E109422D0861B6008D01F5 /* Assets.xcassets in Resources */,
+				02E109872D0B01BD008D01F5 /* Inter-Medium.ttf in Resources */,
 				02E109752D0ACCD4008D01F5 /* Inter-Light.ttf in Resources */,
 				02E109452D0861B6008D01F5 /* Base in Resources */,
 			);
@@ -248,14 +278,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				026144F32D0C07CA0047996E /* UIViewController.swift in Sources */,
 				02E109582D097766008D01F5 /* LoginViewController.swift in Sources */,
 				02E109532D0976DF008D01F5 /* OnboardingModel.swift in Sources */,
 				02E1093D2D0861B5008D01F5 /* OnboardingViewController.swift in Sources */,
 				02E109712D0AC58B008D01F5 /* OnboardingLabel.swift in Sources */,
+				02E1097B2D0AF91E008D01F5 /* AuthTextField.swift in Sources */,
 				02E1096F2D0AC56B008D01F5 /* OnboardingButton.swift in Sources */,
+				02E109892D0B0B4A008D01F5 /* SocialMediaButton.swift in Sources */,
 				02E109652D09CC78008D01F5 /* Constants.swift in Sources */,
+				02E1097E2D0AF9B2008D01F5 /* ActionButton.swift in Sources */,
 				02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */,
 				02E1096C2D0AC453008D01F5 /* SlideView.swift in Sources */,
+				026144F52D0C124C0047996E /* String.swift in Sources */,
+				02E109832D0AFEFA008D01F5 /* TitleLabel.swift in Sources */,
 				02E1093B2D0861B5008D01F5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -405,8 +441,8 @@
 				INFOPLIST_FILE = AIFood/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -432,8 +468,8 @@
 				INFOPLIST_FILE = AIFood/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

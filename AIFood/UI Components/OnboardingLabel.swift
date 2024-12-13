@@ -8,7 +8,7 @@
 import UIKit
 
 final class OnboardingLabel: UILabel {
-    // MARK: - Initializer
+    
     init(text: String? = nil, font: UIFont, textColor: UIColor, alignment: NSTextAlignment = .center, numberOfLines: Int = 0) {
         super.init(frame: .zero)
         self.text = text
@@ -22,4 +22,3 @@ final class OnboardingLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
