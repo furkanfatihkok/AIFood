@@ -117,12 +117,12 @@ final class LoginViewController: UIViewController {
         }
         
         subTitleLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing)
+            make.top.equalTo(titleLabel.snp.bottom).offset(verticalSpacing / 1.5)
             make.leading.equalToSuperview().offset(horizontalMargin)
         }
         
         emailLabel.snp.makeConstraints { make in
-            make.top.equalTo(subTitleLabel.snp.bottom).offset(verticalSpacing * 2)
+            make.top.equalTo(subTitleLabel.snp.bottom).offset(verticalSpacing * 1.5)
             make.leading.equalToSuperview().offset(horizontalMargin)
         }
         
@@ -181,21 +181,6 @@ final class LoginViewController: UIViewController {
     }
 }
 
-// MARK: - SocialMediaButtonProtocol
-extension LoginViewController: SocialMediaButtonProtocol {
-    func didTapGoogleButton() {
-        print("asdas")
-    }
-    
-    func didTapFacebookButton() {
-        print("asdas")
-    }
-    
-    func didTapAppleButton() {
-        print("asdas")
-    }
-}
-
 // MARK: - ActionButtonProtocol
 extension LoginViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
@@ -207,6 +192,22 @@ extension LoginViewController: ActionButtonProtocol {
     }
     
     func didTapRegisterButton() {
-        print("asdas")
+        let registerVC = RegisterViewController()
+        navigationController?.pushViewController(registerVC, animated: true)
+    }
+}
+
+// MARK: - SocialMediaButtonProtocol
+extension LoginViewController: SocialMediaButtonProtocol {
+    func didTapGoogleButton() {
+        print("Google")
+    }
+    
+    func didTapFacebookButton() {
+        print("Facebook")
+    }
+    
+    func didTapAppleButton() {
+        print("Apple")
     }
 }

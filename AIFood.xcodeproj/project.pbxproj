@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		026144F32D0C07CA0047996E /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026144F22D0C07CA0047996E /* UIViewController.swift */; };
 		026144F52D0C124C0047996E /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026144F42D0C124C0047996E /* String.swift */; };
+		026144F92D0C159C0047996E /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026144F82D0C159C0047996E /* RegisterViewController.swift */; };
+		026144FC2D0C1CFC0047996E /* CustomPolicyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026144FB2D0C1CFC0047996E /* CustomPolicyView.swift */; };
 		02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109382D0861B5008D01F5 /* AppDelegate.swift */; };
 		02E1093B2D0861B5008D01F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */; };
 		02E1093D2D0861B5008D01F5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1093C2D0861B5008D01F5 /* OnboardingViewController.swift */; };
@@ -35,6 +37,8 @@
 /* Begin PBXFileReference section */
 		026144F22D0C07CA0047996E /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		026144F42D0C124C0047996E /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		026144F82D0C159C0047996E /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		026144FB2D0C1CFC0047996E /* CustomPolicyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPolicyView.swift; sourceTree = "<group>"; };
 		02E109352D0861B5008D01F5 /* AIFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02E109382D0861B5008D01F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -78,6 +82,32 @@
 				026144F42D0C124C0047996E /* String.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		026144F62D0C15550047996E /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				02E109502D08629C008D01F5 /* Login */,
+				026144F72D0C15750047996E /* Register */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		026144F72D0C15750047996E /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				026144F82D0C159C0047996E /* RegisterViewController.swift */,
+				026144FA2D0C1CEC0047996E /* View */,
+			);
+			path = Register;
+			sourceTree = "<group>";
+		};
+		026144FA2D0C1CEC0047996E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				026144FB2D0C1CFC0047996E /* CustomPolicyView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		02E1092C2D0861B5008D01F5 = {
@@ -134,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				02E1094F2D086295008D01F5 /* Onboarding */,
-				02E109502D08629C008D01F5 /* Login */,
+				026144F62D0C15550047996E /* Authentication */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -278,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				026144FC2D0C1CFC0047996E /* CustomPolicyView.swift in Sources */,
 				026144F32D0C07CA0047996E /* UIViewController.swift in Sources */,
 				02E109582D097766008D01F5 /* LoginViewController.swift in Sources */,
 				02E109532D0976DF008D01F5 /* OnboardingModel.swift in Sources */,
@@ -289,6 +320,7 @@
 				02E109652D09CC78008D01F5 /* Constants.swift in Sources */,
 				02E1097E2D0AF9B2008D01F5 /* ActionButton.swift in Sources */,
 				02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */,
+				026144F92D0C159C0047996E /* RegisterViewController.swift in Sources */,
 				02E1096C2D0AC453008D01F5 /* SlideView.swift in Sources */,
 				026144F52D0C124C0047996E /* String.swift in Sources */,
 				02E109832D0AFEFA008D01F5 /* TitleLabel.swift in Sources */,
