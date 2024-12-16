@@ -216,12 +216,7 @@ extension RegisterViewController: ActionButtonProtocol {
     }
     
     func didTapRegisterButton() {
-        // TODO: Tekrar loginPage gidince register button'a tıklayınca registerVC geçmiyor best practice hangisiyse onu yap navigationoush ise öyle yap değilse dismiss de kal.
-        let loginVC = LoginViewController()
-        loginVC.modalPresentationStyle = .fullScreen
-        dismiss(animated: true) { [weak self] in
-            self?.present(loginVC, animated: true, completion: nil)
-        }
+        navigationController?.popViewController(animated: true)
     }
 }
 
