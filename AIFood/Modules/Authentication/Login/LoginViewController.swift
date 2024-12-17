@@ -128,8 +128,7 @@ final class LoginViewController: UIViewController {
         
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(emailLabel.snp.bottom).offset(verticalSpacing / 2)
-            make.leading.equalToSuperview().offset(horizontalMargin)
-            make.trailing.equalToSuperview().offset(-horizontalMargin)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
             make.height.equalTo(52)
         }
         
@@ -140,8 +139,7 @@ final class LoginViewController: UIViewController {
         
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(passwordLabel.snp.bottom).offset(verticalSpacing / 2)
-            make.leading.equalToSuperview().offset(horizontalMargin)
-            make.trailing.equalToSuperview().offset(-horizontalMargin)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
             make.height.equalTo(52)
         }
         
@@ -152,8 +150,7 @@ final class LoginViewController: UIViewController {
         
         signInButton.snp.makeConstraints { make in
             make.top.equalTo(forgotPassword.snp.bottom).offset(verticalSpacing)
-            make.leading.equalToSuperview().offset(horizontalMargin)
-            make.trailing.equalToSuperview().offset(-horizontalMargin)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
             make.height.equalTo(52)
         }
         
@@ -164,8 +161,7 @@ final class LoginViewController: UIViewController {
         
         socialButtonStackView.snp.makeConstraints { make in
             make.top.equalTo(orSignInWithLabel.snp.bottom).offset(verticalSpacing)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
             make.height.equalTo(50)
         }
         
@@ -188,7 +184,8 @@ extension LoginViewController: ActionButtonProtocol {
     }
     
     func didTapForgotPasswordButton() {
-        print("asdas")
+        let forgotPasswordVC = ForgotPasswordViewController()
+        navigationController?.pushViewController(forgotPasswordVC, animated: true)
     }
     
     func didTapRegisterButton() {
