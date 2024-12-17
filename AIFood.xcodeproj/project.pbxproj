@@ -34,7 +34,6 @@
 		02E1097E2D0AF9B2008D01F5 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1097D2D0AF9B2008D01F5 /* ActionButton.swift */; };
 		02E109832D0AFEFA008D01F5 /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109822D0AFEFA008D01F5 /* TitleLabel.swift */; };
 		02E109872D0B01BD008D01F5 /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02E109862D0B01BD008D01F5 /* Inter-Medium.ttf */; };
-		02E109892D0B0B4A008D01F5 /* SocialMediaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109882D0B0B4A008D01F5 /* SocialMediaButton.swift */; };
 		02EAACA72D1007E300EA68A5 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAACA62D1007E300EA68A5 /* ForgotPasswordViewController.swift */; };
 		02EAACAB2D101CD600EA68A5 /* ForgotSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAACAA2D101CD600EA68A5 /* ForgotSheetViewController.swift */; };
 		02EAACAD2D10319B00EA68A5 /* ForgotSheetOptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAACAC2D10319B00EA68A5 /* ForgotSheetOptionView.swift */; };
@@ -42,6 +41,8 @@
 		02EAACB62D104B5600EA68A5 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAACB52D104B5600EA68A5 /* IconButton.swift */; };
 		02EAACB82D1050D800EA68A5 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAACB72D1050D800EA68A5 /* OTPViewController.swift */; };
 		02EAACBA2D1064F400EA68A5 /* OTPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAACB92D1064F400EA68A5 /* OTPInputView.swift */; };
+		02FED9CE2D119E0E004A80CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02FED9CD2D119E0E004A80CE /* GoogleService-Info.plist */; };
+		02FED9D12D119E65004A80CE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 02FED9D02D119E65004A80CE /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,7 +74,6 @@
 		02E1097D2D0AF9B2008D01F5 /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		02E109822D0AFEFA008D01F5 /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
 		02E109862D0B01BD008D01F5 /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
-		02E109882D0B0B4A008D01F5 /* SocialMediaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialMediaButton.swift; sourceTree = "<group>"; };
 		02EAACA62D1007E300EA68A5 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		02EAACAA2D101CD600EA68A5 /* ForgotSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotSheetViewController.swift; sourceTree = "<group>"; };
 		02EAACAC2D10319B00EA68A5 /* ForgotSheetOptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotSheetOptionView.swift; sourceTree = "<group>"; };
@@ -81,6 +81,7 @@
 		02EAACB52D104B5600EA68A5 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		02EAACB72D1050D800EA68A5 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		02EAACB92D1064F400EA68A5 /* OTPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPInputView.swift; sourceTree = "<group>"; };
+		02FED9CD2D119E0E004A80CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +90,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02E1095B2D0980B1008D01F5 /* SnapKit in Frameworks */,
+				02FED9D12D119E65004A80CE /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,9 +155,11 @@
 				02E1094C2D08623F008D01F5 /* Application */,
 				02E1094D2D086261008D01F5 /* Resources */,
 				026144F12D0C07790047996E /* Extensions */,
-				02E1096D2D0AC515008D01F5 /* UI Components */,
 				02E109632D09CC67008D01F5 /* Constants */,
+				02E1096D2D0AC515008D01F5 /* UI Components */,
+				02FED9D32D11A902004A80CE /* Manager */,
 				02E109512D0976CA008D01F5 /* Model */,
+				02FED9D22D11A8ED004A80CE /* ViewModel */,
 				02E1094E2D08628B008D01F5 /* Modules */,
 			);
 			path = AIFood;
@@ -168,6 +172,7 @@
 				02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */,
 				02E109432D0861B6008D01F5 /* LaunchScreen.storyboard */,
 				02E109462D0861B6008D01F5 /* Info.plist */,
+				02FED9CD2D119E0E004A80CE /* GoogleService-Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -263,7 +268,6 @@
 			children = (
 				02E1096E2D0AC56B008D01F5 /* PrimaryButton.swift */,
 				02E1097D2D0AF9B2008D01F5 /* ActionButton.swift */,
-				02E109882D0B0B4A008D01F5 /* SocialMediaButton.swift */,
 				02EAACB52D104B5600EA68A5 /* IconButton.swift */,
 			);
 			path = Button;
@@ -297,6 +301,20 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		02FED9D22D11A8ED004A80CE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		02FED9D32D11A902004A80CE /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -315,6 +333,7 @@
 			name = AIFood;
 			packageProductDependencies = (
 				02E1095A2D0980B1008D01F5 /* SnapKit */,
+				02FED9D02D119E65004A80CE /* FirebaseAuth */,
 			);
 			productName = AIFood;
 			productReference = 02E109352D0861B5008D01F5 /* AIFood.app */;
@@ -346,6 +365,7 @@
 			mainGroup = 02E1092C2D0861B5008D01F5;
 			packageReferences = (
 				02E109592D0980B1008D01F5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				02FED9CF2D119E65004A80CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 02E109362D0861B5008D01F5 /* Products */;
 			projectDirPath = "";
@@ -362,6 +382,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02E109792D0ACCEF008D01F5 /* Inter-SemiBold.ttf in Resources */,
+				02FED9CE2D119E0E004A80CE /* GoogleService-Info.plist in Resources */,
 				02E109732D0ACCC4008D01F5 /* Inter-Bold.ttf in Resources */,
 				02E109772D0ACCE2008D01F5 /* Inter-Regular.ttf in Resources */,
 				02E109422D0861B6008D01F5 /* Assets.xcassets in Resources */,
@@ -392,7 +413,6 @@
 				02EAACB62D104B5600EA68A5 /* IconButton.swift in Sources */,
 				02E1096F2D0AC56B008D01F5 /* PrimaryButton.swift in Sources */,
 				02EAACAD2D10319B00EA68A5 /* ForgotSheetOptionView.swift in Sources */,
-				02E109892D0B0B4A008D01F5 /* SocialMediaButton.swift in Sources */,
 				02E109652D09CC78008D01F5 /* Constants.swift in Sources */,
 				02E1097E2D0AF9B2008D01F5 /* ActionButton.swift in Sources */,
 				02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */,
@@ -627,6 +647,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		02FED9CF2D119E65004A80CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -634,6 +662,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 02E109592D0980B1008D01F5 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		02FED9D02D119E65004A80CE /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02FED9CF2D119E65004A80CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
