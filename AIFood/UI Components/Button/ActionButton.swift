@@ -24,6 +24,7 @@ final class ActionButton: UIButton {
     weak var delegate: ActionButtonProtocol?
     private let type: ButtonType
     
+    // MARK: - Initializer
     init(title: String, type: ButtonType) {
         self.type = type
         super.init(frame: .zero)
@@ -47,6 +48,7 @@ final class ActionButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup
     private func setupButtonAppearance(title: String) {
         self.setTitle(title, for: .normal)
         self.titleLabel?.font = Constants.Fonts.interSemiBold(size: 14)

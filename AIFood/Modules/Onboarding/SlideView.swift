@@ -18,6 +18,7 @@ protocol SlideViewProtocol: AnyObject {
 final class SlideView: UIView {
     
     weak var delegate: SlideViewProtocol?
+    
     private var currentPage = 0
     private var totalPages = 0
     
@@ -65,17 +66,17 @@ final class SlideView: UIView {
         return pageControl
     }()
     
-    private lazy var nextButton: UIButton = OnboardingButton(
-        title: "Next →",
-        action: #selector(nextTapped),
-        target: self
-    )
+    private lazy var nextButton: PrimaryButton = {
+        let button = PrimaryButton(title: "Next →")
+        button.delegate = self
+        return button
+    }()
     
-    private lazy var skipButton: UIButton = OnboardingButton(
-        title: "Skip",
-        action: #selector(skipTapped),
-        target: self
-    )
+    private lazy var skipButton: PrimaryButton = {
+       let button = PrimaryButton(title: "Skip")
+        button.delegate = self
+        return button
+    }()
     
     private lazy var okButton: UIButton = {
         let button = UIButton()
@@ -185,5 +186,16 @@ final class SlideView: UIView {
         skipButton.isHidden = isLastSlide
         nextButton.isHidden = isLastSlide
         okButton.isHidden = !isLastSlide
+    }
+}
+
+//MARK: - PrimaryButtonProtocol
+extension SlideView: PrimaryButtonProtocol {
+    func didTapPrimaryButton(_ button: PrimaryButton) {
+        if button == nextButton {
+            delegate?.didTapNextButton(at: currentPage)
+        } else if button == skipButton {
+            delegate?.didTapSkipButton()
+        }
     }
 }
