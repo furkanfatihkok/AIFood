@@ -62,19 +62,43 @@ final class RegisterViewController: UIViewController {
     }()
     
     private lazy var socialButtonStackView: UIStackView = {
-        let googleButton = SocialMediaButton(type: .google)
+        let iconButtonSize = CGSize(width: 40, height: 40)
+        
+        let googleButton = IconButton<AnyObject>(
+            iconType: .google,
+            size: iconButtonSize,
+            borderColor: .systemGray5,
+            cornerRadius: 20,
+            borderWidth: 0.5,
+            backgroundColor: .clear
+        )
         googleButton.delegate  = self
         
-        let facebookButton = SocialMediaButton(type: .facebook)
-        facebookButton.delegate = self
+        let facebookButton = IconButton<AnyObject>(
+            iconType: .facebook,
+            size: iconButtonSize,
+            borderColor: .systemGray5,
+            cornerRadius: 20,
+            borderWidth: 0.5,
+            backgroundColor: .clear
+        )
+        facebookButton.delegate  = self
         
-        let appleButton = SocialMediaButton(type: .apple)
-        appleButton.delegate = self
+        let appleButton = IconButton<AnyObject>(
+            iconType: .apple,
+            size: iconButtonSize,
+            borderColor: .systemGray5,
+            cornerRadius: 20,
+            borderWidth: 0.5,
+            backgroundColor: .clear
+        )
+        appleButton.delegate  = self
         
         let stackView = UIStackView(arrangedSubviews: [googleButton, facebookButton, appleButton])
         stackView.axis = .horizontal
-        stackView.spacing = 16
-        stackView.distribution = .fillEqually
+        stackView.spacing = 4
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
         return stackView
     }()
     
@@ -183,14 +207,14 @@ final class RegisterViewController: UIViewController {
         
         socialButtonStackView.snp.makeConstraints { make in
             make.top.equalTo(orSignInWithLabel.snp.bottom).offset(verticalSpacing)
-            make.leading.equalToSuperview().offset(16)
-            make.trailing.equalToSuperview().offset(-16)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(150)
             make.height.equalTo(50)
         }
         
         footerLabel.snp.makeConstraints { make in
             make.top.equalTo(socialButtonStackView.snp.bottom).offset(verticalSpacing * 2)
-            make.centerX.equalToSuperview().offset(-40)
+            make.leading.equalToSuperview().offset(horizontalMargin * 5)
         }
         
         signInButton.snp.makeConstraints { make in

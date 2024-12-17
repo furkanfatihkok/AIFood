@@ -17,13 +17,13 @@ final class NavigationBar: UIView {
     
     // MARK: - UI Components
     private lazy var leftButton: IconButton = {
-        let button = IconButton(
-            icon: leftButtonIcon ?? UIImage(systemName: ""),
+        let button = IconButton<AnyObject>(
+            iconType: .custom(UIImage(systemName: "chevron.left") ?? UIImage()),
             size: CGSize(width: 40, height: 40),
             borderColor: .systemGray5,
-            cornerRadius: 20, 
+            cornerRadius: 20,
             borderWidth: 1,
-            backgroundColor: .white
+            backgroundColor: .clear
         )
         button.delegate = self
         return button
@@ -76,7 +76,7 @@ final class NavigationBar: UIView {
 
 // MARK: - IconButtonProtocol
 extension NavigationBar: IconButtonProtocol {
-    func didTapIconButton(_ button: IconButton) {
+    func didTapIconButton(_ button: IconButton<AnyObject>) {
         if button == leftButton {
             delegate?.didTapLeftButton()
         }
