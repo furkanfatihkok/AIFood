@@ -8,9 +8,20 @@
 import UIKit
 import SnapKit
 
-#warning("signIn button keyboard üstüne çıksın.")
-
 final class LoginViewController: UIViewController {
+    
+    // MARK: - Properties
+    private let loginViewModel: LoginViewModel
+    
+    init(loginViewModel: LoginViewModel) {
+        self.loginViewModel = loginViewModel
+        super.init(nibName: nil, bundle: nil)
+        loginViewModel.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     //MARK: - UI Components
     private lazy var titleLabel: TitleLabel = {
@@ -115,6 +126,11 @@ final class LoginViewController: UIViewController {
         hideKeyboardWhenTapped()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     // MARK:- Setup Views
     private func setupViews() {
         view.backgroundColor = .white
@@ -205,7 +221,12 @@ final class LoginViewController: UIViewController {
 // MARK: - ActionButtonProtocol
 extension LoginViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
-        print("asdas")
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else { return }
+        
+        loginViewModel.loginUser(email: email, password: password)
+        
+        // TODO: Alert ver textFieldlar boş olduğunda
     }
     
     func didTapForgotPasswordButton() {
@@ -224,14 +245,28 @@ extension LoginViewController: ActionButtonProtocol {
 // MARK: - SocialMediaButtonProtocol
 extension LoginViewController: SocialMediaButtonProtocol {
     func didTapGoogleButton() {
-        print("Google")
+        loginViewModel.loginWithGoogle(presenting: self)
     }
     
     func didTapFacebookButton() {
-        print("Facebook")
+        loginViewModel.loginWithFacebook(presenting: self)
     }
     
     func didTapAppleButton() {
         print("Apple")
+    }
+}
+
+// MARK: - LoginViewModelDelegate
+extension LoginViewController: LoginViewModelDelegate {
+    func didLoginSuccses() {
+        let homeVC = HomeViewController()
+        navigationController?.setViewControllers([homeVC], animated: true)
+    }
+    
+    func didRegisterFail(with error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert,animated: true)
     }
 }

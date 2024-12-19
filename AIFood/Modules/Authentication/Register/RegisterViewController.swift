@@ -15,6 +15,7 @@ final class RegisterViewController: UIViewController {
     init(registerViewModel: RegisterViewModel) {
         self.registerViewModel = registerViewModel
         super.init(nibName: nil, bundle: nil)
+        registerViewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -129,7 +130,6 @@ final class RegisterViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         hideKeyboardWhenTapped()
-        registerViewModel.delegate = self
     }
     
     // MARK: - SetupViews
@@ -245,6 +245,8 @@ extension RegisterViewController: ActionButtonProtocol {
               let userName = usernameTextField.text, !userName.isEmpty else { return }
         
         registerViewModel.registerUser(email: email, password: password)
+        
+        // TODO: Alert ver textFieldlar boş olduğunda
     }
     
     func didTapForgotPasswordButton() {
@@ -253,7 +255,6 @@ extension RegisterViewController: ActionButtonProtocol {
     
     func didTapRegisterButton() {
         navigationController?.popViewController(animated: true)
-        // register to login page
     }
 }
 
@@ -275,7 +276,10 @@ extension RegisterViewController: SocialMediaButtonProtocol {
 // MARK: - RegisterViewModelDelegate
 extension RegisterViewController: RegisterViewModelDelegate {
     func didRegisterSuccses() {
-        let loginVC = LoginViewController()
+        let authManager = FirebaseAuthManager.shared
+        let loginViewModel = LoginViewModel(delegate: nil, authManager: authManager)
+        let loginVC = LoginViewController(loginViewModel: loginViewModel)
+
         navigationController?.setViewControllers([loginVC], animated: true)
     }
     

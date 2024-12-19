@@ -18,6 +18,10 @@
 		026A23542D11C2E9002AE2D2 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026A23532D11C2E9002AE2D2 /* FirebaseAuthManager.swift */; };
 		026A23562D11C40D002AE2D2 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026A23552D11C40D002AE2D2 /* RegisterViewModel.swift */; };
 		026A23592D1301C2002AE2D2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026A23582D1301C2002AE2D2 /* HomeViewController.swift */; };
+		029068932D142A380077318D /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 029068922D142A380077318D /* GoogleSignIn */; };
+		029068952D142A380077318D /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 029068942D142A380077318D /* GoogleSignInSwift */; };
+		029068972D142B670077318D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029068962D142B670077318D /* GoogleService-Info.plist */; };
+		0290689A2D1442F30077318D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 029068992D1442F30077318D /* FacebookLogin */; };
 		02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109382D0861B5008D01F5 /* AppDelegate.swift */; };
 		02E1093B2D0861B5008D01F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */; };
 		02E1093D2D0861B5008D01F5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1093C2D0861B5008D01F5 /* OnboardingViewController.swift */; };
@@ -45,7 +49,6 @@
 		02EAACB62D104B5600EA68A5 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAACB52D104B5600EA68A5 /* IconButton.swift */; };
 		02EAACB82D1050D800EA68A5 /* OTPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAACB72D1050D800EA68A5 /* OTPViewController.swift */; };
 		02EAACBA2D1064F400EA68A5 /* OTPInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02EAACB92D1064F400EA68A5 /* OTPInputView.swift */; };
-		02FED9CE2D119E0E004A80CE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 02FED9CD2D119E0E004A80CE /* GoogleService-Info.plist */; };
 		02FED9D12D119E65004A80CE /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 02FED9D02D119E65004A80CE /* FirebaseAuth */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +64,7 @@
 		026A23532D11C2E9002AE2D2 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		026A23552D11C40D002AE2D2 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		026A23582D1301C2002AE2D2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		029068962D142B670077318D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		02E109352D0861B5008D01F5 /* AIFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02E109382D0861B5008D01F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -89,7 +93,6 @@
 		02EAACB52D104B5600EA68A5 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		02EAACB72D1050D800EA68A5 /* OTPViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewController.swift; sourceTree = "<group>"; };
 		02EAACB92D1064F400EA68A5 /* OTPInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPInputView.swift; sourceTree = "<group>"; };
-		02FED9CD2D119E0E004A80CE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +100,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0290689A2D1442F30077318D /* FacebookLogin in Frameworks */,
 				02E1095B2D0980B1008D01F5 /* SnapKit in Frameworks */,
 				02FED9D12D119E65004A80CE /* FirebaseAuth in Frameworks */,
+				029068932D142A380077318D /* GoogleSignIn in Frameworks */,
+				029068952D142A380077318D /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +194,7 @@
 				02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */,
 				02E109432D0861B6008D01F5 /* LaunchScreen.storyboard */,
 				02E109462D0861B6008D01F5 /* Info.plist */,
-				02FED9CD2D119E0E004A80CE /* GoogleService-Info.plist */,
+				029068962D142B670077318D /* GoogleService-Info.plist */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -354,6 +360,9 @@
 			packageProductDependencies = (
 				02E1095A2D0980B1008D01F5 /* SnapKit */,
 				02FED9D02D119E65004A80CE /* FirebaseAuth */,
+				029068922D142A380077318D /* GoogleSignIn */,
+				029068942D142A380077318D /* GoogleSignInSwift */,
+				029068992D1442F30077318D /* FacebookLogin */,
 			);
 			productName = AIFood;
 			productReference = 02E109352D0861B5008D01F5 /* AIFood.app */;
@@ -386,6 +395,8 @@
 			packageReferences = (
 				02E109592D0980B1008D01F5 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				02FED9CF2D119E65004A80CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				029068912D142A380077318D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				029068982D1442F30077318D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 02E109362D0861B5008D01F5 /* Products */;
 			projectDirPath = "";
@@ -402,7 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				02E109792D0ACCEF008D01F5 /* Inter-SemiBold.ttf in Resources */,
-				02FED9CE2D119E0E004A80CE /* GoogleService-Info.plist in Resources */,
+				029068972D142B670077318D /* GoogleService-Info.plist in Resources */,
 				02E109732D0ACCC4008D01F5 /* Inter-Bold.ttf in Resources */,
 				02E109772D0ACCE2008D01F5 /* Inter-Regular.ttf in Resources */,
 				02E109422D0861B6008D01F5 /* Assets.xcassets in Resources */,
@@ -663,6 +674,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		029068912D142A380077318D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		029068982D1442F30077318D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.0;
+			};
+		};
 		02E109592D0980B1008D01F5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -682,6 +709,21 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		029068922D142A380077318D /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 029068912D142A380077318D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		029068942D142A380077318D /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 029068912D142A380077318D /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		029068992D1442F30077318D /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 029068982D1442F30077318D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
+		};
 		02E1095A2D0980B1008D01F5 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 02E109592D0980B1008D01F5 /* XCRemoteSwiftPackageReference "SnapKit" */;
