@@ -40,6 +40,11 @@ final class ForgotPasswordViewController: UIViewController {
         hideKeyboardWhenTapped()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     // MARK: - SetupViews
     private func setupViews() {
         view.backgroundColor = .white

@@ -103,7 +103,12 @@ extension OnboardingViewController: SlideViewProtocol {
     }
     
     func didTapOkButton() {
-        let loginVC = LoginViewController()
+        UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
+        UserDefaults.standard.synchronize()
+        
+        let authManager = FirebaseAuthManager.shared
+        let loginViewModel = LoginViewModel(delegate: nil, authManager: authManager)
+        let loginVC = LoginViewController(loginViewModel: loginViewModel)
         navigationController?.pushViewController(loginVC, animated: true)
     }
 }
