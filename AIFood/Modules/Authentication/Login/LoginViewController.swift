@@ -214,7 +214,9 @@ extension LoginViewController: ActionButtonProtocol {
     }
     
     func didTapRegisterButton() {
-        let registerVC = RegisterViewController()
+        let authManager = FirebaseAuthManager.shared
+        let registerViewModel = RegisterViewModel(delegate: nil, authManager: authManager)
+        let registerVC = RegisterViewController(registerViewModel: registerViewModel)
         navigationController?.pushViewController(registerVC, animated: true)
     }
 }

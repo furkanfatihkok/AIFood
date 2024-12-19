@@ -9,6 +9,18 @@ import UIKit
 
 final class RegisterViewController: UIViewController {
     
+    // MARK: - Properties
+    private let registerViewModel: RegisterViewModel
+    
+    init(registerViewModel: RegisterViewModel) {
+        self.registerViewModel = registerViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - UI Components
     private lazy var titleLabel: TitleLabel = {
         return TitleLabel(text: "Create your new \naccount", style: .title)
@@ -117,6 +129,7 @@ final class RegisterViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         hideKeyboardWhenTapped()
+        registerViewModel.delegate = self
     }
     
     // MARK: - SetupViews
@@ -224,15 +237,14 @@ final class RegisterViewController: UIViewController {
     }
 }
 
+// MARK: - ActionButtonProtocol
 extension RegisterViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
-        if !policyView.checkBoxButton.isSelected {
-            let alert = UIAlertController(title: "Error", message: "Please agree to the Privacy Policy before proceeding.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-            return
-        }
-        print("Registration completed!")
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty,
+              let userName = usernameTextField.text, !userName.isEmpty else { return }
+        
+        registerViewModel.registerUser(email: email, password: password)
     }
     
     func didTapForgotPasswordButton() {
@@ -241,9 +253,11 @@ extension RegisterViewController: ActionButtonProtocol {
     
     func didTapRegisterButton() {
         navigationController?.popViewController(animated: true)
+        // register to login page
     }
 }
 
+// MARK: - SocialMediaButtonProtocol
 extension RegisterViewController: SocialMediaButtonProtocol {
     func didTapGoogleButton() {
         print("Google")
@@ -255,5 +269,19 @@ extension RegisterViewController: SocialMediaButtonProtocol {
     
     func didTapAppleButton() {
         print("Apple")
+    }
+}
+
+// MARK: - RegisterViewModelDelegate
+extension RegisterViewController: RegisterViewModelDelegate {
+    func didRegisterSuccses() {
+        let loginVC = LoginViewController()
+        navigationController?.setViewControllers([loginVC], animated: true)
+    }
+    
+    func didRegisterFail(with error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }
