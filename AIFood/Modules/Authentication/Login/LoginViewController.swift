@@ -13,7 +13,7 @@ final class LoginViewController: UIViewController {
     // MARK: - Properties
     private let loginViewModel: LoginViewModel
     
-    init(loginViewModel: LoginViewModel) {
+    init(loginViewModel: LoginViewModel = LoginViewModel(delegate: nil, authManager: FirebaseAuthManager.shared)) {
         self.loginViewModel = loginViewModel
         super.init(nibName: nil, bundle: nil)
         loginViewModel.delegate = self
@@ -230,7 +230,9 @@ extension LoginViewController: ActionButtonProtocol {
     }
     
     func didTapForgotPasswordButton() {
-        let forgotPasswordVC = ForgotPasswordViewController()
+        let authManager = FirebaseAuthManager.shared
+        let forgotPasswordViewModel = ForgotPasswordViewModel(delegate: nil, authManager: authManager)
+        let forgotPasswordVC = ForgotPasswordViewController(forgotPasswordViewModel: forgotPasswordViewModel)
         navigationController?.pushViewController(forgotPasswordVC, animated: true)
     }
     

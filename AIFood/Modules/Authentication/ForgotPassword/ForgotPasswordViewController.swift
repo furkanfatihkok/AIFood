@@ -10,6 +10,19 @@ import SnapKit
 
 final class ForgotPasswordViewController: UIViewController {
     
+    // MARK: - Properties
+    private let forgotPasswordViewModel: ForgotPasswordViewModel
+    
+    init(forgotPasswordViewModel: ForgotPasswordViewModel = ForgotPasswordViewModel(delegate: nil, authManager: FirebaseAuthManager.shared)) {
+        self.forgotPasswordViewModel = forgotPasswordViewModel
+        super.init(nibName: nil, bundle: nil)
+        self.forgotPasswordViewModel.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - UI Components
     private lazy var titleLabel: TitleLabel = {
         return TitleLabel(text: "Forgot password?", style: .title)
@@ -91,7 +104,21 @@ final class ForgotPasswordViewController: UIViewController {
 // MARK: - ActionButtonProtocol
 extension ForgotPasswordViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
+        guard let email = emailTextField.text, !email.isEmpty else { return }
+        
+        forgotPasswordViewModel.checkIfEmailExists(email: email)
+    }
+    
+    func didTapForgotPasswordButton() {}
+    
+    func didTapRegisterButton() {}
+}
+
+// MARK: - ForgotPasswordViewModelDelegate
+extension ForgotPasswordViewController: ForgotPasswordViewModelDelegate {
+    func emailExists() {
         let optionsVC = ForgotSheetViewController()
+        optionsVC.email = emailTextField.text
         if let sheet = optionsVC.sheetPresentationController {
             sheet.detents = [.medium()]
             sheet.prefersGrabberVisible = true
@@ -102,7 +129,17 @@ extension ForgotPasswordViewController: ActionButtonProtocol {
         present(optionsVC, animated: true)
     }
     
-    func didTapForgotPasswordButton() {}
+    func emailDoesNotExists() {
+        let alert = UIAlertController(title: "Error", message: "This email is not registered.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
     
-    func didTapRegisterButton() {}
+    func didFailWithError(_ error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    func passwordResetSent() {}
 }

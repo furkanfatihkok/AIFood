@@ -37,7 +37,7 @@ final class ForgotSheetOptionView: UIView {
         return label
     }()
     
-    private lazy var detailLabel: UILabel = {
+     lazy var detailLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.Fonts.interMedium(size: 14)
         label.textColor = .black

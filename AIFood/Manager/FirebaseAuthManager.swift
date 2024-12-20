@@ -6,30 +6,62 @@
 //
 
 import Foundation
-import FirebaseAuth
-import GoogleSignIn
 import FirebaseCore
+import FirebaseAuth
+import FirebaseFirestore
+import GoogleSignIn
 import FacebookLogin
 
 protocol FirebaseAuthManagerProtocol: AnyObject {
     func registerUser(email: String, password: String, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
+    func saveEmailToFirestore(email: String)
+    func checkIfEmailExistsInFirestore(email: String, completion: @escaping (Result<Bool, Error>) -> Void)
     func loginUser(email: String, password: String, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
     func signInWithGoogle(presenting viewController: UIViewController, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
     func signInWithFacebook(presenting viewController: UIViewController, completion: @escaping (Result<AuthDataResult, Error>) -> Void)
 }
 
+// MARK: - FirebaseAuthManager
 final class FirebaseAuthManager {
     static let shared = FirebaseAuthManager()
     private init() {}
 }
 
+// MARK: - FirebaseAuthManagerProtocol
 extension FirebaseAuthManager: FirebaseAuthManagerProtocol {
     func registerUser(email: String, password: String, completion: @escaping (Result<FirebaseAuth.AuthDataResult, any Error>) -> Void) {
-        Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
             if let error = error {
                 completion(.failure(error))
             } else if let authResult = authResult {
+                self?.saveEmailToFirestore(email: email)
                 completion(.success(authResult))
+            }
+        }
+    }
+    
+    func saveEmailToFirestore(email: String) {
+        let db = Firestore.firestore()
+        db.collection("emails").document(email).setData(["email": email]) { error in
+            if let error = error {
+                print("Error saving user: \(error.localizedDescription)")
+            } else {
+                print("User saved successfully to Firestore.")
+            }
+        }
+    }
+    
+    func checkIfEmailExistsInFirestore(email: String, completion: @escaping (Result<Bool, any Error>) -> Void) {
+        let db = Firestore.firestore()
+        let emailDocument = db.collection("emails").document(email)
+        
+        emailDocument.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else if let document = document, document.exists {
+                completion(.success(true))
+            } else {
+                completion(.success(false))
             }
         }
     }
@@ -49,7 +81,7 @@ extension FirebaseAuthManager: FirebaseAuthManagerProtocol {
             completion(.failure(NSError(domain: "FirebaseAuthManager", code: -1, userInfo: [NSLocalizedDescriptionKey: "Missing client ID"])))
             return
         }
-        
+        //TODO: google ile giriş yapılan email firestore'a kaydet
         let signInConfig = GIDConfiguration(clientID: clientID)
         GIDSignIn.sharedInstance.configuration = signInConfig
         
@@ -86,7 +118,7 @@ extension FirebaseAuthManager: FirebaseAuthManagerProtocol {
                 completion(.failure(error))
                 return
             }
-            
+            //TODO: facebook ile giriş yapılan email firestore'a kaydet
             guard let result = result, !result.isCancelled else {
                 completion(.failure(NSError(domain: "FirebaseAuthManager", code: -2, userInfo: [NSLocalizedDescriptionKey: "Facebook login canceled"])))
                 return

@@ -9,6 +9,22 @@ import UIKit
 
 final class OTPViewController: UIViewController {
     
+    // MARK: - Properties
+    private let email: String
+    private let forgotPasswordViewModel: ForgotPasswordViewModel
+    
+    init(email: String, forgotPasswordViewModel: ForgotPasswordViewModel = ForgotPasswordViewModel(delegate: nil, authManager: FirebaseAuthManager.shared)) {
+        self.email = email
+        self.forgotPasswordViewModel = forgotPasswordViewModel
+        super.init(nibName: nil, bundle: nil)
+        self.forgotPasswordViewModel.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
     // MARK: UI Components
     private lazy var navigationBar: NavigationBar = {
         let navBar = NavigationBar(
@@ -24,7 +40,7 @@ final class OTPViewController: UIViewController {
     }()
     
     private lazy var subtitle: TitleLabel = {
-        return TitleLabel(text: "Enter the verification code we send you on:\ngelcek veri", style: .subtitle)
+        return TitleLabel(text: "Enter the verification code we send you on:\n\(email)", style: .subtitle)
     }()
     
     private lazy var otpInputView: OTPInputView = {
@@ -113,7 +129,7 @@ final class OTPViewController: UIViewController {
 // MARK: - NavigationBarProtocol
 extension OTPViewController: NavigationBarProtocol {
     func didTapLeftButton() {
-        print("back button pressedsf")
+        dismiss(animated: true)
     }
     
     func didTapRightButton() {}
@@ -134,7 +150,18 @@ extension OTPViewController: ActionButtonProtocol {
     
     func didTapForgotPasswordButton() {}
     
-    func didTapRegisterButton() {
-        print("Resend button tapped")
+    func didTapRegisterButton() {}
+}
+
+// MARK: - ForgotPasswordViewModelDelegate
+extension OTPViewController: ForgotPasswordViewModelDelegate {
+    func emailExists() {}
+    
+    func emailDoesNotExists() {}
+    
+    func didFailWithError(_ error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }

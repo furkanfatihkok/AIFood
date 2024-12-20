@@ -22,6 +22,8 @@
 		029068952D142A380077318D /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 029068942D142A380077318D /* GoogleSignInSwift */; };
 		029068972D142B670077318D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029068962D142B670077318D /* GoogleService-Info.plist */; };
 		0290689A2D1442F30077318D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 029068992D1442F30077318D /* FacebookLogin */; };
+		02C44CC52D154B7B007F123F /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C44CC42D154B7B007F123F /* ForgotPasswordViewModel.swift */; };
+		02C44CC82D155523007F123F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 02C44CC72D155523007F123F /* FirebaseFirestore */; };
 		02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109382D0861B5008D01F5 /* AppDelegate.swift */; };
 		02E1093B2D0861B5008D01F5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */; };
 		02E1093D2D0861B5008D01F5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E1093C2D0861B5008D01F5 /* OnboardingViewController.swift */; };
@@ -65,6 +67,7 @@
 		026A23552D11C40D002AE2D2 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		026A23582D1301C2002AE2D2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		029068962D142B670077318D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		02C44CC42D154B7B007F123F /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		02E109352D0861B5008D01F5 /* AIFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02E109382D0861B5008D01F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		02E1093A2D0861B5008D01F5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -105,6 +108,7 @@
 				02FED9D12D119E65004A80CE /* FirebaseAuth in Frameworks */,
 				029068932D142A380077318D /* GoogleSignIn in Frameworks */,
 				029068952D142A380077318D /* GoogleSignInSwift in Frameworks */,
+				02C44CC82D155523007F123F /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,11 +159,19 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		02C44CC62D155523007F123F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		02E1092C2D0861B5008D01F5 = {
 			isa = PBXGroup;
 			children = (
 				02E109372D0861B5008D01F5 /* AIFood */,
 				02E109362D0861B5008D01F5 /* Products */,
+				02C44CC62D155523007F123F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -329,6 +341,7 @@
 			children = (
 				026A23552D11C40D002AE2D2 /* RegisterViewModel.swift */,
 				025312D62D14052F009D576B /* LoginViewModel.swift */,
+				02C44CC42D154B7B007F123F /* ForgotPasswordViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -363,6 +376,7 @@
 				029068922D142A380077318D /* GoogleSignIn */,
 				029068942D142A380077318D /* GoogleSignInSwift */,
 				029068992D1442F30077318D /* FacebookLogin */,
+				02C44CC72D155523007F123F /* FirebaseFirestore */,
 			);
 			productName = AIFood;
 			productReference = 02E109352D0861B5008D01F5 /* AIFood.app */;
@@ -454,6 +468,7 @@
 				02E1096C2D0AC453008D01F5 /* SlideView.swift in Sources */,
 				0210E70F2D11878C009AA6D2 /* ChangePasswordViewController.swift in Sources */,
 				02EAACA72D1007E300EA68A5 /* ForgotPasswordViewController.swift in Sources */,
+				02C44CC52D154B7B007F123F /* ForgotPasswordViewModel.swift in Sources */,
 				026144F52D0C124C0047996E /* String.swift in Sources */,
 				02EAACB82D1050D800EA68A5 /* OTPViewController.swift in Sources */,
 				026A23562D11C40D002AE2D2 /* RegisterViewModel.swift in Sources */,
@@ -723,6 +738,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 029068982D1442F30077318D /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
 			productName = FacebookLogin;
+		};
+		02C44CC72D155523007F123F /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 02FED9CF2D119E65004A80CE /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 		02E1095A2D0980B1008D01F5 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
