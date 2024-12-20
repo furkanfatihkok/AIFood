@@ -12,7 +12,7 @@ final class RegisterViewController: UIViewController {
     // MARK: - Properties
     private let registerViewModel: RegisterViewModel
     
-    init(registerViewModel: RegisterViewModel) {
+    init(registerViewModel: RegisterViewModel = RegisterViewModel(delegate: nil, authManager: FirebaseAuthManager.shared)) {
         self.registerViewModel = registerViewModel
         super.init(nibName: nil, bundle: nil)
         registerViewModel.delegate = self

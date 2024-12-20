@@ -10,6 +10,14 @@ import SnapKit
 
 final class ForgotSheetViewController: UIViewController {
     
+    //MARK: - Properties
+    private var options: [ForgotSheetOptionView] = []
+    var email: String? {
+        didSet {
+            emailOption.detailLabel.text = email ?? "Email not found"
+        }
+    }
+    
     // MARK: - UI Components
     private lazy var titleLabel: TitleLabel = {
         return TitleLabel(text: "Forgot password?", style: .title)
@@ -24,7 +32,7 @@ final class ForgotSheetViewController: UIViewController {
             icon: UIImage(systemName: "message.circle.fill")!,
             title: "Send via phone",
             detail: "0 (544)  440 3328",
-            isSelected: true
+            isSelected: false
         )
         option.delegate = self
         return option
@@ -34,8 +42,8 @@ final class ForgotSheetViewController: UIViewController {
         let option = ForgotSheetOptionView(
             icon: UIImage(systemName: "envelope.fill")!,
             title: "Send via email",
-            detail: "furkankok296@gmail.com",
-            isSelected: false
+            detail: "",
+            isSelected: true
         )
         option.delegate = self
         return option
@@ -47,9 +55,6 @@ final class ForgotSheetViewController: UIViewController {
         return button
     }()
     
-    // MARK: - Properties
-    private var options: [ForgotSheetOptionView] = []
-    
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +65,6 @@ final class ForgotSheetViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
-    
     
     private func setupViews() {
         view.backgroundColor = .white
@@ -122,7 +126,8 @@ extension ForgotSheetViewController: ForgotSheetOptionViewProtocol {
 // MARK: - ActionButtonProtocol
 extension ForgotSheetViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
-        let otpVC = OTPViewController()
+        guard let email = emailOption.detailLabel.text, !email.isEmpty else { return }
+        let otpVC = OTPViewController(email: email)
         otpVC.modalPresentationStyle = .fullScreen
         present(otpVC, animated: false)
     }
@@ -130,4 +135,23 @@ extension ForgotSheetViewController: ActionButtonProtocol {
     func didTapForgotPasswordButton() {}
     
     func didTapRegisterButton() {}
+}
+
+// MARK: - ForgotPasswordViewModelDelegate
+extension ForgotSheetViewController: ForgotPasswordViewModelDelegate {
+    func emailExists() {}
+    
+    func emailDoesNotExists() {}
+    
+    func passwordResetSent() {
+        let alert = UIAlertController(title: "Success", message: "A password reset email has been sent to \(emailOption.detailLabel.text ?? "your email").", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    func didFailWithError(_ error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
 }
