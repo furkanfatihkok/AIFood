@@ -40,6 +40,12 @@ final class ForgotPasswordViewController: UIViewController {
         return AuthTextField(placeholder: "Enter Email")
     }()
     
+    private lazy var emailErrorLabel: TitleLabel = {
+        let label =  TitleLabel(text: "", style: .password)
+        label.isHidden = true
+        return label
+    }()
+    
     private lazy var continueButton: ActionButton = {
         let button = ActionButton(title: "Continue", type: .primary)
         button.delegate = self
@@ -66,6 +72,7 @@ final class ForgotPasswordViewController: UIViewController {
         view.addSubview(subtitleLabel)
         view.addSubview(emailLabel)
         view.addSubview(emailTextField)
+        view.addSubview(emailErrorLabel)
         view.addSubview(continueButton)
         
         let horizontalMargin = UIScreen.main.bounds.width * 0.05
@@ -93,6 +100,11 @@ final class ForgotPasswordViewController: UIViewController {
             make.height.equalTo(52)
         }
         
+        emailErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
+        }
+        
         continueButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(verticalSpacing * 1.5)
             make.leading.trailing.equalToSuperview().inset(horizontalMargin)
@@ -104,9 +116,19 @@ final class ForgotPasswordViewController: UIViewController {
 // MARK: - ActionButtonProtocol
 extension ForgotPasswordViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
-        guard let email = emailTextField.text, !email.isEmpty else { return }
+        emailErrorLabel.isHidden = true
         
-        forgotPasswordViewModel.checkIfEmailExists(email: email)
+        let email = emailTextField.text ?? ""
+        
+        if email.isEmpty {
+            emailErrorLabel.text = "Email field cannot be empty."
+            emailErrorLabel.isHidden = false
+        } else if !email.isValidEmail() {
+            emailErrorLabel.text = "Please enter a valid email address."
+            emailErrorLabel.isHidden = false
+        } else {
+            forgotPasswordViewModel.checkIfEmailExists(email: email)
+        }
     }
     
     func didTapForgotPasswordButton() {}
@@ -130,9 +152,8 @@ extension ForgotPasswordViewController: ForgotPasswordViewModelDelegate {
     }
     
     func emailDoesNotExists() {
-        let alert = UIAlertController(title: "Error", message: "This email is not registered.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        emailErrorLabel.text = "The email is not registered."
+        emailErrorLabel.isHidden = false
     }
     
     func didFailWithError(_ error: String) {
