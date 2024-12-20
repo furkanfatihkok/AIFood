@@ -11,11 +11,13 @@ final class RegisterViewController: UIViewController {
     
     // MARK: - Properties
     private let registerViewModel: RegisterViewModel
+    private let loginViewModel: LoginViewModel
     
-    init(registerViewModel: RegisterViewModel = RegisterViewModel(delegate: nil, authManager: FirebaseAuthManager.shared)) {
+    init(registerViewModel: RegisterViewModel, loginViewModel: LoginViewModel) {
         self.registerViewModel = registerViewModel
+        self.loginViewModel = loginViewModel
         super.init(nibName: nil, bundle: nil)
-        registerViewModel.delegate = self
+        loginViewModel.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -48,7 +50,7 @@ final class RegisterViewController: UIViewController {
     }()
     
     private lazy var passwordLabel: TitleLabel = {
-        return TitleLabel(text: "Password", style: .password)
+        return TitleLabel(text: "Password", style: .email)
     }()
     
     private lazy var passwordTextField: AuthTextField = {
@@ -261,11 +263,11 @@ extension RegisterViewController: ActionButtonProtocol {
 // MARK: - SocialMediaButtonProtocol
 extension RegisterViewController: SocialMediaButtonProtocol {
     func didTapGoogleButton() {
-        print("Google")
+        loginViewModel.loginWithGoogle(presenting: self)
     }
     
     func didTapFacebookButton() {
-        print("Facebook")
+        loginViewModel.loginWithFacebook(presenting: self)
     }
     
     func didTapAppleButton() {
@@ -287,5 +289,19 @@ extension RegisterViewController: RegisterViewModelDelegate {
         let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+}
+
+// MARK: - LoginViewModelDelegate
+extension RegisterViewController: LoginViewModelDelegate {
+    func didLoginSuccses() {
+        let homeVC = HomeViewController()
+        navigationController?.setViewControllers([homeVC], animated: true)
+    }
+    
+    func didRegisterError(with error: String) {
+        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert,animated: true)
     }
 }

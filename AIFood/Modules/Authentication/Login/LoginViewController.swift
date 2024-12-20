@@ -40,12 +40,24 @@ final class LoginViewController: UIViewController {
         return AuthTextField(placeholder: "Enter email")
     }()
     
+    private lazy var emailErrorLabel: TitleLabel = {
+        let label =  TitleLabel(text: "", style: .password)
+        label.isHidden = true
+        return label
+    }()
+    
     private lazy var passwordLabel: TitleLabel = {
-        return TitleLabel(text: "Password", style: .password)
+        return TitleLabel(text: "Password", style: .email)
     }()
     
     private lazy var passwordTextField: AuthTextField = {
         return AuthTextField(placeholder: "Password", isSecure: true)
+    }()
+    
+    private lazy var passwordErrorLabel: TitleLabel = {
+        let label = TitleLabel(text: "", style: .password)
+        label.isHidden = true
+        return label
     }()
     
     private lazy var forgotPassword: ActionButton = {
@@ -139,8 +151,10 @@ final class LoginViewController: UIViewController {
         view.addSubview(subTitleLabel)
         view.addSubview(emailLabel)
         view.addSubview(emailTextField)
+        view.addSubview(emailErrorLabel)
         view.addSubview(passwordLabel)
         view.addSubview(passwordTextField)
+        view.addSubview(passwordErrorLabel)
         view.addSubview(forgotPassword)
         view.addSubview(signInButton)
         view.addSubview(orSignInWithLabel)
@@ -172,6 +186,11 @@ final class LoginViewController: UIViewController {
             make.height.equalTo(52)
         }
         
+        emailErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
+        }
+        
         passwordLabel.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(verticalSpacing * 2)
             make.leading.equalToSuperview().offset(horizontalMargin)
@@ -181,6 +200,11 @@ final class LoginViewController: UIViewController {
             make.top.equalTo(passwordLabel.snp.bottom).offset(verticalSpacing / 2)
             make.leading.trailing.equalToSuperview().inset(horizontalMargin)
             make.height.equalTo(52)
+        }
+        
+        passwordErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
         }
         
         forgotPassword.snp.makeConstraints { make in
@@ -221,13 +245,40 @@ final class LoginViewController: UIViewController {
 // MARK: - ActionButtonProtocol
 extension LoginViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
-        guard let email = emailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty else { return }
-        
-        loginViewModel.loginUser(email: email, password: password)
-        
-        // TODO: Alert ver textFieldlar boş olduğunda
-    }
+            emailErrorLabel.isHidden = true
+            passwordErrorLabel.isHidden = true
+
+            let email = emailTextField.text ?? ""
+            let password = passwordTextField.text ?? ""
+            
+            var hasError = false
+
+            if email.isEmpty {
+                emailErrorLabel.text = "Email field cannot be empty."
+                emailErrorLabel.isHidden = false
+                hasError = true
+            } else if !email.isValidEmail() {
+                emailErrorLabel.text = "Please enter a valid email address."
+                emailErrorLabel.isHidden = false
+                hasError = true
+            }
+            
+            if password.isEmpty {
+                passwordErrorLabel.text = "Password field cannot be empty."
+                passwordErrorLabel.isHidden = false
+                hasError = true
+            } else if !password.isValidPassword() {
+                passwordErrorLabel.text = "Password does not meet requirements."
+                passwordErrorLabel.isHidden = false
+                hasError = true
+            }
+            
+            if hasError {
+                return
+            }
+            
+            loginViewModel.loginUser(email: email, password: password)
+        }
     
     func didTapForgotPasswordButton() {
         let authManager = FirebaseAuthManager.shared
@@ -239,7 +290,8 @@ extension LoginViewController: ActionButtonProtocol {
     func didTapRegisterButton() {
         let authManager = FirebaseAuthManager.shared
         let registerViewModel = RegisterViewModel(delegate: nil, authManager: authManager)
-        let registerVC = RegisterViewController(registerViewModel: registerViewModel)
+        let loginViewModel = LoginViewModel(delegate: nil, authManager: authManager)
+        let registerVC = RegisterViewController(registerViewModel: registerViewModel, loginViewModel: loginViewModel)
         navigationController?.pushViewController(registerVC, animated: true)
     }
 }
