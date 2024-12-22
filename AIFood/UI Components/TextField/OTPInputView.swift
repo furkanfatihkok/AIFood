@@ -83,10 +83,14 @@ final class OTPInputView: UIView {
         }
     }
     
-    // MARK: - Public Method
+    // MARK: - Public Methods
     func resetFields() {
         textFields.forEach { $0.text = "" }
         textFields.first?.becomeFirstResponder()
+    }
+    
+    func getCode() -> String {
+        return textFields.compactMap { $0.text }.joined()
     }
 }
 

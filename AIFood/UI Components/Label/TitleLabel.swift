@@ -33,7 +33,7 @@ final class TitleLabel: UILabel {
             self.textColor = .black
         case .password:
             self.font = Constants.Fonts.interMedium(size: 14)
-            self.textColor = .black
+            self.textColor = .gray
         case .footer:
             self.font = Constants.Fonts.interMedium(size: 14)
             self.textColor = .black

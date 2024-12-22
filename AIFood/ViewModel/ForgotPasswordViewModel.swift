@@ -7,23 +7,37 @@
 
 import Foundation
 
-protocol ForgotPasswordViewModelDelegate: AnyObject {
+// MARK: - EmailValidationDelegate
+protocol EmailValidationDelegate: AnyObject {
     func emailExists()
     func emailDoesNotExists()
     func didFailWithError(_ error: String)
 }
 
-protocol ForgotPasswordViewModelProtocol {
-    var delegate: ForgotPasswordViewModelDelegate { get set }
-    func checkIfEmailExists(email: String)
+// MARK: - VerificationCodeDelegate
+protocol VerificationCodeDelegate: AnyObject {
+    func verificationCodeSent()
+    func verificationSuccessful()
+    func verificationFailed(_ error: String)
 }
 
+// MARK: - ForgotPasswordViewModelProtocol
+protocol ForgotPasswordViewModelProtocol {
+    var emailDelegate: EmailValidationDelegate? { get set }
+    var verificationCodeDelegate: VerificationCodeDelegate? { get set }
+    func checkIfEmailExists(email: String)
+    func requestVerificationCode(email: String)
+    func verifyCode(inputCode: String)
+}
+
+// MARK: - ForgotPasswordViewModel
 final class ForgotPasswordViewModel {
-    weak var delegate: ForgotPasswordViewModelDelegate?
+    weak var emailDelegate: EmailValidationDelegate?
+    weak var verificationCodeDelegate: VerificationCodeDelegate?
     private let authManager: FirebaseAuthManagerProtocol
+    private var generatedCode: String?
     
-    init(delegate: ForgotPasswordViewModelDelegate?, authManager: FirebaseAuthManagerProtocol) {
-        self.delegate = delegate
+    init(authManager: FirebaseAuthManagerProtocol) {
         self.authManager = authManager
     }
     
@@ -32,13 +46,47 @@ final class ForgotPasswordViewModel {
             switch result {
             case .success(let exists):
                 if exists {
-                    self?.delegate?.emailExists()
+                    self?.emailDelegate?.emailExists()
                 } else {
-                    self?.delegate?.emailDoesNotExists()
+                    self?.emailDelegate?.emailDoesNotExists()
                 }
             case .failure(let error):
-                self?.delegate?.didFailWithError(error.localizedDescription)
+                self?.emailDelegate?.didFailWithError(error.localizedDescription)
             }
+        }
+    }
+    
+    func requestVerificationCode(email: String) {
+        guard generatedCode == nil else {
+            verificationCodeDelegate?.verificationFailed("A verification code has already been sent. Please check your email.")
+            return
+        }
+        
+        let code = String(format: "%04d", Int.random(in: 1000..<9999))
+        self.generatedCode = code
+        
+        MailjetServiceManager.shared.sendEmailWithVerificationCode(to: email, verificationCode: code) { [weak self] result in
+            switch result {
+            case .success:
+                print("Verification code sent successfully: \(code)")
+                self?.verificationCodeDelegate?.verificationCodeSent()
+            case .failure(let error):
+                self?.generatedCode = nil
+                self?.verificationCodeDelegate?.verificationFailed("Failed to send verification code: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func verifyCode(inputCode: String) {
+        guard let actualCode = generatedCode else {
+            verificationCodeDelegate?.verificationFailed("Verification code is not generated yet.")
+            return
+        }
+        
+        if inputCode == actualCode {
+            verificationCodeDelegate?.verificationSuccessful()
+        } else {
+            verificationCodeDelegate?.verificationFailed("Incorrect verification code.")
         }
     }
 }

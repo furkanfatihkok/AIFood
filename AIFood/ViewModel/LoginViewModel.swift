@@ -23,8 +23,7 @@ final class LoginViewModel: LoginViewModelProtocol {
     weak var delegate: LoginViewModelDelegate?
     private let authManager: FirebaseAuthManagerProtocol
     
-    init(delegate: LoginViewModelDelegate?, authManager: FirebaseAuthManagerProtocol) {
-        self.delegate = delegate
+    init(authManager: FirebaseAuthManagerProtocol) {
         self.authManager = authManager
     }
     

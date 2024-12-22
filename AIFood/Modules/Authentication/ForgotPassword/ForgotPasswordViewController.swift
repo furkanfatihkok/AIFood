@@ -13,10 +13,10 @@ final class ForgotPasswordViewController: UIViewController {
     // MARK: - Properties
     private let forgotPasswordViewModel: ForgotPasswordViewModel
     
-    init(forgotPasswordViewModel: ForgotPasswordViewModel = ForgotPasswordViewModel(delegate: nil, authManager: FirebaseAuthManager.shared)) {
+    init(forgotPasswordViewModel: ForgotPasswordViewModel) {
         self.forgotPasswordViewModel = forgotPasswordViewModel
         super.init(nibName: nil, bundle: nil)
-        self.forgotPasswordViewModel.delegate = self
+        forgotPasswordViewModel.emailDelegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -38,6 +38,12 @@ final class ForgotPasswordViewController: UIViewController {
     
     private lazy var emailTextField: AuthTextField = {
         return AuthTextField(placeholder: "Enter Email")
+    }()
+    
+    private lazy var emailErrorLabel: TitleLabel = {
+        let label =  TitleLabel(text: "", style: .password)
+        label.isHidden = true
+        return label
     }()
     
     private lazy var continueButton: ActionButton = {
@@ -66,6 +72,7 @@ final class ForgotPasswordViewController: UIViewController {
         view.addSubview(subtitleLabel)
         view.addSubview(emailLabel)
         view.addSubview(emailTextField)
+        view.addSubview(emailErrorLabel)
         view.addSubview(continueButton)
         
         let horizontalMargin = UIScreen.main.bounds.width * 0.05
@@ -93,6 +100,11 @@ final class ForgotPasswordViewController: UIViewController {
             make.height.equalTo(52)
         }
         
+        emailErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
+        }
+        
         continueButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(verticalSpacing * 1.5)
             make.leading.trailing.equalToSuperview().inset(horizontalMargin)
@@ -104,9 +116,19 @@ final class ForgotPasswordViewController: UIViewController {
 // MARK: - ActionButtonProtocol
 extension ForgotPasswordViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
-        guard let email = emailTextField.text, !email.isEmpty else { return }
+        emailErrorLabel.isHidden = true
         
-        forgotPasswordViewModel.checkIfEmailExists(email: email)
+        let email = emailTextField.text ?? ""
+        
+        if email.isEmpty {
+            emailErrorLabel.text = "Email field cannot be empty."
+            emailErrorLabel.isHidden = false
+        } else if !email.isValidEmail() {
+            emailErrorLabel.text = "Please enter a valid email address."
+            emailErrorLabel.isHidden = false
+        } else {
+            forgotPasswordViewModel.checkIfEmailExists(email: email)
+        }
     }
     
     func didTapForgotPasswordButton() {}
@@ -114,25 +136,24 @@ extension ForgotPasswordViewController: ActionButtonProtocol {
     func didTapRegisterButton() {}
 }
 
-// MARK: - ForgotPasswordViewModelDelegate
-extension ForgotPasswordViewController: ForgotPasswordViewModelDelegate {
+// MARK: - EmailValidationDelegate
+extension ForgotPasswordViewController: EmailValidationDelegate {
     func emailExists() {
-        let optionsVC = ForgotSheetViewController()
-        optionsVC.email = emailTextField.text
-        if let sheet = optionsVC.sheetPresentationController {
+        let forgotSheetVC = ForgotSheetViewController(forgotPasswordViewModel: forgotPasswordViewModel)
+        forgotSheetVC.email = emailTextField.text
+        if let sheet = forgotSheetVC.sheetPresentationController {
             sheet.detents = [.medium()]
             sheet.prefersGrabberVisible = true
             sheet.prefersEdgeAttachedInCompactHeight = true
             sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
         }
-        optionsVC.modalPresentationStyle = .pageSheet
-        present(optionsVC, animated: true)
+        forgotSheetVC.modalPresentationStyle = .pageSheet
+        present(forgotSheetVC, animated: true)
     }
     
     func emailDoesNotExists() {
-        let alert = UIAlertController(title: "Error", message: "This email is not registered.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        emailErrorLabel.text = "The email is not registered."
+        emailErrorLabel.isHidden = false
     }
     
     func didFailWithError(_ error: String) {
@@ -140,6 +161,4 @@ extension ForgotPasswordViewController: ForgotPasswordViewModelDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
-    
-    func passwordResetSent() {}
 }
