@@ -11,12 +11,12 @@ import SnapKit
 final class LoginViewController: UIViewController {
     
     // MARK: - Properties
-    private let loginViewModel: LoginViewModel
+    private let loginViewModel: LoginViewModel?
     
-    init(loginViewModel: LoginViewModel = LoginViewModel(delegate: nil, authManager: FirebaseAuthManager.shared)) {
+    init(loginViewModel: LoginViewModel? = nil) {
         self.loginViewModel = loginViewModel
         super.init(nibName: nil, bundle: nil)
-        loginViewModel.delegate = self
+        loginViewModel?.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -277,20 +277,20 @@ extension LoginViewController: ActionButtonProtocol {
                 return
             }
             
-            loginViewModel.loginUser(email: email, password: password)
+        loginViewModel?.loginUser(email: email, password: password)
         }
     
     func didTapForgotPasswordButton() {
         let authManager = FirebaseAuthManager.shared
-        let forgotPasswordViewModel = ForgotPasswordViewModel(delegate: nil, authManager: authManager)
+        let forgotPasswordViewModel = ForgotPasswordViewModel(authManager: authManager)
         let forgotPasswordVC = ForgotPasswordViewController(forgotPasswordViewModel: forgotPasswordViewModel)
         navigationController?.pushViewController(forgotPasswordVC, animated: true)
     }
     
     func didTapRegisterButton() {
         let authManager = FirebaseAuthManager.shared
-        let registerViewModel = RegisterViewModel(delegate: nil, authManager: authManager)
-        let loginViewModel = LoginViewModel(delegate: nil, authManager: authManager)
+        let registerViewModel = RegisterViewModel(authManager: authManager)
+        let loginViewModel = LoginViewModel(authManager: authManager)
         let registerVC = RegisterViewController(registerViewModel: registerViewModel, loginViewModel: loginViewModel)
         navigationController?.pushViewController(registerVC, animated: true)
     }
@@ -299,11 +299,11 @@ extension LoginViewController: ActionButtonProtocol {
 // MARK: - SocialMediaButtonProtocol
 extension LoginViewController: SocialMediaButtonProtocol {
     func didTapGoogleButton() {
-        loginViewModel.loginWithGoogle(presenting: self)
+        loginViewModel?.loginWithGoogle(presenting: self)
     }
     
     func didTapFacebookButton() {
-        loginViewModel.loginWithFacebook(presenting: self)
+        loginViewModel?.loginWithFacebook(presenting: self)
     }
     
     func didTapAppleButton() {

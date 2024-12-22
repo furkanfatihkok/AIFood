@@ -22,8 +22,7 @@ final class RegisterViewModel: RegisterViewModelProtocol {
     weak var delegate: RegisterViewModelDelegate?
     private let authManager: FirebaseAuthManagerProtocol
     
-    init(delegate: RegisterViewModelDelegate?, authManager: FirebaseAuthManagerProtocol) {
-        self.delegate = delegate
+    init(authManager: FirebaseAuthManagerProtocol) {
         self.authManager = authManager
     }
     

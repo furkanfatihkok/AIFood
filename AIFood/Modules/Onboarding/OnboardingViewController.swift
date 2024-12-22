@@ -107,7 +107,7 @@ extension OnboardingViewController: SlideViewProtocol {
         UserDefaults.standard.synchronize()
         
         let authManager = FirebaseAuthManager.shared
-        let loginViewModel = LoginViewModel(delegate: nil, authManager: authManager)
+        let loginViewModel = LoginViewModel(authManager: authManager)
         let loginVC = LoginViewController(loginViewModel: loginViewModel)
         navigationController?.pushViewController(loginVC, animated: true)
     }

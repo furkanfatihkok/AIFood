@@ -10,12 +10,22 @@ import SnapKit
 
 final class ForgotSheetViewController: UIViewController {
     
-    //MARK: - Properties
+    // MARK: - Properties
+    private let forgotPasswordViewModel: ForgotPasswordViewModel
     private var options: [ForgotSheetOptionView] = []
     var email: String? {
         didSet {
             emailOption.detailLabel.text = email ?? "Email not found"
         }
+    }
+    
+    init(forgotPasswordViewModel: ForgotPasswordViewModel) {
+        self.forgotPasswordViewModel = forgotPasswordViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: - UI Components
@@ -127,7 +137,8 @@ extension ForgotSheetViewController: ForgotSheetOptionViewProtocol {
 extension ForgotSheetViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
         guard let email = emailOption.detailLabel.text, !email.isEmpty else { return }
-        let otpVC = OTPViewController(email: email)
+        
+        let otpVC = OTPViewController(email: email, forgotPasswordViewModel: forgotPasswordViewModel)
         otpVC.modalPresentationStyle = .fullScreen
         present(otpVC, animated: false)
     }
@@ -135,23 +146,4 @@ extension ForgotSheetViewController: ActionButtonProtocol {
     func didTapForgotPasswordButton() {}
     
     func didTapRegisterButton() {}
-}
-
-// MARK: - ForgotPasswordViewModelDelegate
-extension ForgotSheetViewController: ForgotPasswordViewModelDelegate {
-    func emailExists() {}
-    
-    func emailDoesNotExists() {}
-    
-    func passwordResetSent() {
-        let alert = UIAlertController(title: "Success", message: "A password reset email has been sent to \(emailOption.detailLabel.text ?? "your email").", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
-    
-    func didFailWithError(_ error: String) {
-        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
-    }
 }
