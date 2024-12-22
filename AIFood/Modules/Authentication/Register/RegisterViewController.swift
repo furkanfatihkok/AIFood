@@ -10,14 +10,15 @@ import UIKit
 final class RegisterViewController: UIViewController {
     
     // MARK: - Properties
-    private let registerViewModel: RegisterViewModel
-    private let loginViewModel: LoginViewModel
+    private let registerViewModel: RegisterViewModel?
+    private let loginViewModel: LoginViewModel?
     
-    init(registerViewModel: RegisterViewModel, loginViewModel: LoginViewModel) {
+    init(registerViewModel: RegisterViewModel? = nil, loginViewModel: LoginViewModel? = nil) {
         self.registerViewModel = registerViewModel
         self.loginViewModel = loginViewModel
         super.init(nibName: nil, bundle: nil)
-        loginViewModel.delegate = self
+        registerViewModel?.delegate = self
+        loginViewModel?.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -246,7 +247,7 @@ extension RegisterViewController: ActionButtonProtocol {
               let password = passwordTextField.text, !password.isEmpty,
               let userName = usernameTextField.text, !userName.isEmpty else { return }
         
-        registerViewModel.registerUser(email: email, password: password)
+        registerViewModel?.registerUser(email: email, password: password)
         
         // TODO: Alert ver textFieldlar boş olduğunda
     }
@@ -263,11 +264,11 @@ extension RegisterViewController: ActionButtonProtocol {
 // MARK: - SocialMediaButtonProtocol
 extension RegisterViewController: SocialMediaButtonProtocol {
     func didTapGoogleButton() {
-        loginViewModel.loginWithGoogle(presenting: self)
+        loginViewModel?.loginWithGoogle(presenting: self)
     }
     
     func didTapFacebookButton() {
-        loginViewModel.loginWithFacebook(presenting: self)
+        loginViewModel?.loginWithFacebook(presenting: self)
     }
     
     func didTapAppleButton() {
@@ -279,7 +280,7 @@ extension RegisterViewController: SocialMediaButtonProtocol {
 extension RegisterViewController: RegisterViewModelDelegate {
     func didRegisterSuccses() {
         let authManager = FirebaseAuthManager.shared
-        let loginViewModel = LoginViewModel(delegate: nil, authManager: authManager)
+        let loginViewModel = LoginViewModel(authManager: authManager)
         let loginVC = LoginViewController(loginViewModel: loginViewModel)
 
         navigationController?.setViewControllers([loginVC], animated: true)

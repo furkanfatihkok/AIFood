@@ -18,6 +18,7 @@
 		026A23542D11C2E9002AE2D2 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026A23532D11C2E9002AE2D2 /* FirebaseAuthManager.swift */; };
 		026A23562D11C40D002AE2D2 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026A23552D11C40D002AE2D2 /* RegisterViewModel.swift */; };
 		026A23592D1301C2002AE2D2 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026A23582D1301C2002AE2D2 /* HomeViewController.swift */; };
+		027D019E2D15A59300135855 /* MailjetServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 027D019D2D15A59300135855 /* MailjetServiceManager.swift */; };
 		029068932D142A380077318D /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 029068922D142A380077318D /* GoogleSignIn */; };
 		029068952D142A380077318D /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 029068942D142A380077318D /* GoogleSignInSwift */; };
 		029068972D142B670077318D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029068962D142B670077318D /* GoogleService-Info.plist */; };
@@ -66,6 +67,7 @@
 		026A23532D11C2E9002AE2D2 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		026A23552D11C40D002AE2D2 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		026A23582D1301C2002AE2D2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		027D019D2D15A59300135855 /* MailjetServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailjetServiceManager.swift; sourceTree = "<group>"; };
 		029068962D142B670077318D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		02C44CC42D154B7B007F123F /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		02E109352D0861B5008D01F5 /* AIFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -350,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				026A23532D11C2E9002AE2D2 /* FirebaseAuthManager.swift */,
+				027D019D2D15A59300135855 /* MailjetServiceManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				02E109832D0AFEFA008D01F5 /* TitleLabel.swift in Sources */,
 				02E1093B2D0861B5008D01F5 /* SceneDelegate.swift in Sources */,
 				02EAACAB2D101CD600EA68A5 /* ForgotSheetViewController.swift in Sources */,
+				027D019E2D15A59300135855 /* MailjetServiceManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

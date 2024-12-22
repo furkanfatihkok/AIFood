@@ -7,23 +7,27 @@
 
 import UIKit
 
+#warning("kopyala yapıştır ile kodu yapılştırabilmeliyim.")
+#warning("timer ekle.")
+#warning("ActionButtonProtocol generic yap.")
+
 final class OTPViewController: UIViewController {
     
     // MARK: - Properties
     private let email: String
-    private let forgotPasswordViewModel: ForgotPasswordViewModel
+    private let forgotPasswordViewModel: ForgotPasswordViewModel?
+    private var verificationCode: String = ""
     
-    init(email: String, forgotPasswordViewModel: ForgotPasswordViewModel = ForgotPasswordViewModel(delegate: nil, authManager: FirebaseAuthManager.shared)) {
+    init(email: String, forgotPasswordViewModel: ForgotPasswordViewModel? = nil) {
         self.email = email
         self.forgotPasswordViewModel = forgotPasswordViewModel
         super.init(nibName: nil, bundle: nil)
-        self.forgotPasswordViewModel.delegate = self
+        self.forgotPasswordViewModel?.verificationCodeDelegate = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     // MARK: UI Components
     private lazy var navigationBar: NavigationBar = {
@@ -40,7 +44,7 @@ final class OTPViewController: UIViewController {
     }()
     
     private lazy var subtitle: TitleLabel = {
-        return TitleLabel(text: "Enter the verification code we send you on:\n\(email)", style: .subtitle)
+        return TitleLabel(text: "Enter the verification code we sent you on:\n\(email)", style: .subtitle)
     }()
     
     private lazy var otpInputView: OTPInputView = {
@@ -59,8 +63,6 @@ final class OTPViewController: UIViewController {
         return button
     }()
     
-    // TODO: TIMER EKLE
-    
     private lazy var continueButton: ActionButton = {
         let button = ActionButton(title: "Continue", type: .primary)
         button.delegate = self
@@ -71,6 +73,7 @@ final class OTPViewController: UIViewController {
         super.viewDidLoad()
         setupViews()
         hideKeyboardWhenTapped()
+        requestNewVerificationCode()
     }
     
     private func setupViews() {
@@ -124,6 +127,10 @@ final class OTPViewController: UIViewController {
             make.height.equalTo(52)
         }
     }
+    
+    private func requestNewVerificationCode() {
+        forgotPasswordViewModel?.requestVerificationCode(email: email)
+    }
 }
 
 // MARK: - NavigationBarProtocol
@@ -138,30 +145,50 @@ extension OTPViewController: NavigationBarProtocol {
 // MARK:- OTPInputViewProtocol
 extension OTPViewController: OTPInputViewProtocol {
     func didEnterCode(_ code: String) {
-        print("Entered OTP: \(code)")
+        forgotPasswordViewModel?.verifyCode(inputCode: code)
     }
 }
 
 // MARK: - ActionButtonProtocol
 extension OTPViewController: ActionButtonProtocol {
     func didTapPrimaryButton() {
-        print("Continue button tapped")
+        forgotPasswordViewModel?.verifyCode(inputCode: verificationCode)
     }
     
     func didTapForgotPasswordButton() {}
     
-    func didTapRegisterButton() {}
+    func didTapRegisterButton() {
+        requestNewVerificationCode()
+    }
 }
 
 // MARK: - ForgotPasswordViewModelDelegate
-extension OTPViewController: ForgotPasswordViewModelDelegate {
-    func emailExists() {}
+extension OTPViewController: VerificationCodeDelegate {
+    func verificationCodeSent() {
+        // TODO: Burada alert yerine başka bir şey düşün.
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Success", message: "Verification code sent to \(self.email).", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
+    }
     
-    func emailDoesNotExists() {}
+    func verificationSuccessful() {
+        //TODO: go to change passwordVC
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Success", message: "Verification successful!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                self.dismiss(animated: true)
+            }))
+            self.present(alert, animated: true)
+        }
+    }
     
-    func didFailWithError(_ error: String) {
-        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+    func verificationFailed(_ error: String) {
+        DispatchQueue.main.async {
+            let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alert, animated: true)
+        }
     }
 }

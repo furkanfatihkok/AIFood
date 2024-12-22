@@ -23,7 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         if isOnboardingCompleted  {
             let authManager = FirebaseAuthManager.shared
-            let loginViewModel = LoginViewModel(delegate: nil, authManager: authManager)
+            let loginViewModel = LoginViewModel(authManager: authManager)
             rootViewController = LoginViewController(loginViewModel: loginViewModel)
         } else {
             rootViewController = OnboardingViewController()

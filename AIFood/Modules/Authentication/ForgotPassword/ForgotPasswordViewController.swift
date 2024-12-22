@@ -13,10 +13,10 @@ final class ForgotPasswordViewController: UIViewController {
     // MARK: - Properties
     private let forgotPasswordViewModel: ForgotPasswordViewModel
     
-    init(forgotPasswordViewModel: ForgotPasswordViewModel = ForgotPasswordViewModel(delegate: nil, authManager: FirebaseAuthManager.shared)) {
+    init(forgotPasswordViewModel: ForgotPasswordViewModel) {
         self.forgotPasswordViewModel = forgotPasswordViewModel
         super.init(nibName: nil, bundle: nil)
-        self.forgotPasswordViewModel.delegate = self
+        forgotPasswordViewModel.emailDelegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -136,19 +136,19 @@ extension ForgotPasswordViewController: ActionButtonProtocol {
     func didTapRegisterButton() {}
 }
 
-// MARK: - ForgotPasswordViewModelDelegate
-extension ForgotPasswordViewController: ForgotPasswordViewModelDelegate {
+// MARK: - EmailValidationDelegate
+extension ForgotPasswordViewController: EmailValidationDelegate {
     func emailExists() {
-        let optionsVC = ForgotSheetViewController()
-        optionsVC.email = emailTextField.text
-        if let sheet = optionsVC.sheetPresentationController {
+        let forgotSheetVC = ForgotSheetViewController(forgotPasswordViewModel: forgotPasswordViewModel)
+        forgotSheetVC.email = emailTextField.text
+        if let sheet = forgotSheetVC.sheetPresentationController {
             sheet.detents = [.medium()]
             sheet.prefersGrabberVisible = true
             sheet.prefersEdgeAttachedInCompactHeight = true
             sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
         }
-        optionsVC.modalPresentationStyle = .pageSheet
-        present(optionsVC, animated: true)
+        forgotSheetVC.modalPresentationStyle = .pageSheet
+        present(forgotSheetVC, animated: true)
     }
     
     func emailDoesNotExists() {
@@ -161,6 +161,4 @@ extension ForgotPasswordViewController: ForgotPasswordViewModelDelegate {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
     }
-    
-    func passwordResetSent() {}
 }
