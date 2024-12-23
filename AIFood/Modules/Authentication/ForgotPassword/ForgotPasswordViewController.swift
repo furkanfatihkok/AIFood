@@ -46,6 +46,8 @@ final class ForgotPasswordViewController: BaseViewController {
         return label
     }()
     
+    private var emailErrorLabelHeightConstraint: Constraint?
+    
     private lazy var continueButton: ActionButton = {
         let button = ActionButton(title: "Continue", type: .primary)
         button.delegate = self
@@ -103,6 +105,7 @@ final class ForgotPasswordViewController: BaseViewController {
         emailErrorLabel.snp.makeConstraints { make in
             make.top.equalTo(emailTextField.snp.bottom).offset(5)
             make.leading.trailing.equalToSuperview().inset(horizontalMargin)
+            emailErrorLabelHeightConstraint = make.height.equalTo(0).constraint
         }
         
         continueButton.snp.makeConstraints { make in
@@ -118,19 +121,18 @@ extension ForgotPasswordViewController: ActionButtonProtocol {
     func didTapButton(ofType type: ActionButton.ButtonType) {
         switch type {
         case .primary:
-            emailErrorLabel.isHidden = true
-            
             let email = emailTextField.text ?? ""
+            var hasError = false
             
-            if email.isEmpty {
-                emailErrorLabel.text = "Email field cannot be empty."
-                emailErrorLabel.isHidden = false
-            } else if !email.isValidEmail() {
-                emailErrorLabel.text = "Please enter a valid email address."
-                emailErrorLabel.isHidden = false
+            if let emailError = Validator.validateEmail(email) {
+                ErrorLabel.updateErrorLabel(emailErrorLabel, withMessage: emailError, heightConstraint: emailErrorLabelHeightConstraint)
+                hasError = true
             } else {
-                forgotPasswordViewModel.checkIfEmailExists(email: email)
+                ErrorLabel.updateErrorLabel(emailErrorLabel, withMessage: nil, heightConstraint: emailErrorLabelHeightConstraint)
             }
+            
+            guard !hasError else { return }
+            forgotPasswordViewModel.checkIfEmailExists(email: email)
         default:
             break
         }

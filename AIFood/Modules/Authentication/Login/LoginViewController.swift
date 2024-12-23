@@ -274,7 +274,6 @@ extension LoginViewController: ActionButtonProtocol {
             guard !hasError else { return }
             
             loginViewModel?.loginUser(email: email, password: password)
-            
         case .secondary:
             let authManager = FirebaseAuthManager.shared
             let forgotPasswordViewModel = ForgotPasswordViewModel(authManager: authManager)
