@@ -8,17 +8,15 @@
 import UIKit
 
 protocol ActionButtonProtocol: AnyObject {
-    func didTapPrimaryButton()
-    func didTapForgotPasswordButton()
-    func didTapRegisterButton()
+    func didTapButton(ofType type: ActionButton.ButtonType)
 }
 
 final class ActionButton: UIButton {
     
     enum ButtonType {
         case primary
-        case forgotPassword
-        case register
+        case secondary
+        case tertiary
     }
     
     weak var delegate: ActionButtonProtocol?
@@ -35,10 +33,7 @@ final class ActionButton: UIButton {
             self.setTitleColor(.white, for: .normal)
             self.backgroundColor = Constants.Colors.primaryColor
             self.layer.cornerRadius = 24
-        case .forgotPassword:
-            self.setTitleColor(Constants.Colors.primaryColor, for: .normal)
-            self.backgroundColor = .clear
-        case .register:
+        case .secondary, .tertiary:
             self.setTitleColor(Constants.Colors.primaryColor, for: .normal)
             self.backgroundColor = .clear
         }
@@ -56,13 +51,6 @@ final class ActionButton: UIButton {
     }
     
     @objc private func buttonTapped() {
-        switch type {
-        case .primary:
-            delegate?.didTapPrimaryButton()
-        case .forgotPassword:
-            delegate?.didTapForgotPasswordButton()
-        case .register:
-            delegate?.didTapRegisterButton()
-        }
+        delegate?.didTapButton(ofType: type)
     }
 }

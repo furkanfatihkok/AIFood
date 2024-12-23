@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import SnapKit
 
-final class RegisterViewController: UIViewController {
+final class RegisterViewController: BaseViewController {
     
     // MARK: - Properties
     private let registerViewModel: RegisterViewModel?
@@ -42,6 +43,14 @@ final class RegisterViewController: UIViewController {
         return AuthTextField(placeholder: "Enter email")
     }()
     
+    private lazy var emailErrorLabel: TitleLabel = {
+        let label =  TitleLabel(text: "", style: .password)
+        label.isHidden = true
+        return label
+    }()
+    
+    private var emailErrorLabelHeightConstraint: Constraint?
+    
     private lazy var usernameLabel: TitleLabel = {
         return TitleLabel(text: "User Name", style: .email)
     }()
@@ -50,6 +59,14 @@ final class RegisterViewController: UIViewController {
         return AuthTextField(placeholder: "Enter usarname")
     }()
     
+    private lazy var usernameErrorLabel: TitleLabel = {
+        let label = TitleLabel(text: "", style: .password)
+        label.isHidden = true
+        return label
+    }()
+    
+    private var usernameErrorLabelHeightConstraint: Constraint?
+    
     private lazy var passwordLabel: TitleLabel = {
         return TitleLabel(text: "Password", style: .email)
     }()
@@ -57,6 +74,14 @@ final class RegisterViewController: UIViewController {
     private lazy var passwordTextField: AuthTextField = {
         return AuthTextField(placeholder: "Password", isSecure: true)
     }()
+    
+    private lazy var passwordErrorLabel: TitleLabel = {
+        let label = TitleLabel(text: "", style: .password)
+        label.isHidden = true
+        return label
+    }()
+    
+    private var passwordErrorLabelHeightConstraint: Constraint?
     
     private lazy var policyView: CustomPolicyView = {
         let view = CustomPolicyView()
@@ -123,7 +148,7 @@ final class RegisterViewController: UIViewController {
     }()
     
     private lazy var signInButton: ActionButton = {
-        let button = ActionButton(title: "Sign In", type: .register)
+        let button = ActionButton(title: "Sign In", type: .tertiary)
         button.delegate = self
         return button
     }()
@@ -143,10 +168,13 @@ final class RegisterViewController: UIViewController {
         view.addSubview(subTitleLabel)
         view.addSubview(emailLabel)
         view.addSubview(emailTextField)
+        view.addSubview(emailErrorLabel)
         view.addSubview(usernameLabel)
         view.addSubview(usernameTextField)
+        view.addSubview(usernameErrorLabel)
         view.addSubview(passwordLabel)
         view.addSubview(passwordTextField)
+        view.addSubview(passwordErrorLabel)
         view.addSubview(policyView)
         view.addSubview(registerButton)
         view.addSubview(orSignInWithLabel)
@@ -174,45 +202,59 @@ final class RegisterViewController: UIViewController {
         
         emailTextField.snp.makeConstraints { make in
             make.top.equalTo(emailLabel.snp.bottom).offset(verticalSpacing / 2)
-            make.leading.equalToSuperview().offset(horizontalMargin)
-            make.trailing.equalToSuperview().offset(-horizontalMargin)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
             make.height.equalTo(52)
         }
         
+        emailErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(emailTextField.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
+            emailErrorLabelHeightConstraint = make.height.equalTo(0).constraint
+        }
+        
         usernameLabel.snp.makeConstraints { make in
-            make.top.equalTo(emailTextField.snp.bottom).offset(verticalSpacing * 1.25)
+            make.top.equalTo(emailErrorLabel.snp.bottom).offset(verticalSpacing * 1.25)
             make.leading.equalToSuperview().offset(horizontalMargin)
         }
         
         usernameTextField.snp.makeConstraints { make in
             make.top.equalTo(usernameLabel.snp.bottom).offset(verticalSpacing / 2)
-            make.leading.equalToSuperview().offset(horizontalMargin)
-            make.trailing.equalToSuperview().offset(-horizontalMargin)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
             make.height.equalTo(52)
         }
         
+        usernameErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(usernameTextField.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
+            usernameErrorLabelHeightConstraint = make.height.equalTo(0).constraint
+        }
+        
         passwordLabel.snp.makeConstraints { make in
-            make.top.equalTo(usernameTextField.snp.bottom).offset(verticalSpacing * 1.25)
+            make.top.equalTo(usernameErrorLabel.snp.bottom).offset(verticalSpacing * 1.25)
             make.leading.equalToSuperview().offset(horizontalMargin)
         }
         
         passwordTextField.snp.makeConstraints { make in
             make.top.equalTo(passwordLabel.snp.bottom).offset(verticalSpacing / 2)
-            make.leading.equalToSuperview().offset(horizontalMargin)
-            make.trailing.equalToSuperview().offset(-horizontalMargin)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
             make.height.equalTo(52)
         }
         
+        passwordErrorLabel.snp.makeConstraints { make in
+            make.top.equalTo(passwordTextField.snp.bottom).offset(5)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
+            passwordErrorLabelHeightConstraint = make.height.equalTo(0).constraint
+        }
+        
         policyView.snp.makeConstraints { make in
-            make.top.equalTo(passwordTextField.snp.bottom).offset(verticalSpacing)
+            make.top.equalTo(passwordErrorLabel.snp.bottom).offset(verticalSpacing)
             make.leading.equalToSuperview().offset(horizontalMargin)
             make.trailing.equalToSuperview().offset(-horizontalMargin / 2)
         }
         
         registerButton.snp.makeConstraints { make in
             make.top.equalTo(policyView.snp.bottom).offset(verticalSpacing * 2)
-            make.leading.equalToSuperview().offset(horizontalMargin)
-            make.trailing.equalToSuperview().offset(-horizontalMargin)
+            make.leading.trailing.equalToSuperview().inset(horizontalMargin)
             make.height.equalTo(52)
         }
         
@@ -229,7 +271,7 @@ final class RegisterViewController: UIViewController {
         }
         
         footerLabel.snp.makeConstraints { make in
-            make.top.equalTo(socialButtonStackView.snp.bottom).offset(verticalSpacing * 2)
+            make.bottom.equalTo(socialButtonStackView.snp.bottom).offset(verticalSpacing * 2)
             make.leading.equalToSuperview().offset(horizontalMargin * 5)
         }
         
@@ -242,22 +284,45 @@ final class RegisterViewController: UIViewController {
 
 // MARK: - ActionButtonProtocol
 extension RegisterViewController: ActionButtonProtocol {
-    func didTapPrimaryButton() {
-        guard let email = emailTextField.text, !email.isEmpty,
-              let password = passwordTextField.text, !password.isEmpty,
-              let userName = usernameTextField.text, !userName.isEmpty else { return }
-        
-        registerViewModel?.registerUser(email: email, password: password)
-        
-        // TODO: Alert ver textFieldlar boş olduğunda
-    }
-    
-    func didTapForgotPasswordButton() {
-        // TODO: Policy format
-    }
-    
-    func didTapRegisterButton() {
-        navigationController?.popViewController(animated: true)
+    func didTapButton(ofType type: ActionButton.ButtonType) {
+        switch type {
+        case .primary:
+            let email = emailTextField.text ?? ""
+            let password = passwordTextField.text ?? ""
+            let username = usernameTextField.text ?? ""
+            var hasError = false
+            
+            if let emailError = Validator.validateEmail(email) {
+                ErrorLabel.updateErrorLabel(emailErrorLabel, withMessage: emailError, heightConstraint: emailErrorLabelHeightConstraint)
+                hasError = true
+            } else {
+                ErrorLabel.updateErrorLabel(emailErrorLabel, withMessage: nil, heightConstraint: emailErrorLabelHeightConstraint)
+            }
+            
+            if let usernameError = Validator.validateUsername(username) {
+                ErrorLabel.updateErrorLabel(usernameErrorLabel, withMessage: usernameError, heightConstraint: usernameErrorLabelHeightConstraint)
+                hasError = true
+            } else {
+                ErrorLabel.updateErrorLabel(usernameErrorLabel, withMessage: nil, heightConstraint: usernameErrorLabelHeightConstraint)
+            }
+            
+            if let passwordError = Validator.validatePassword(password) {
+                ErrorLabel.updateErrorLabel(passwordErrorLabel, withMessage: passwordError, heightConstraint: passwordErrorLabelHeightConstraint)
+                hasError = true
+            } else {
+                ErrorLabel.updateErrorLabel(passwordErrorLabel, withMessage: nil, heightConstraint: passwordErrorLabelHeightConstraint)
+            }
+            
+            guard !hasError else { return }
+            
+            registerViewModel?.registerUser(email: email, password: password)
+            
+        case .secondary:
+            // TODO: Policy format
+            print("Policy format")
+        case .tertiary:
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 
@@ -282,14 +347,12 @@ extension RegisterViewController: RegisterViewModelDelegate {
         let authManager = FirebaseAuthManager.shared
         let loginViewModel = LoginViewModel(authManager: authManager)
         let loginVC = LoginViewController(loginViewModel: loginViewModel)
-
+        
         navigationController?.setViewControllers([loginVC], animated: true)
     }
     
     func didRegisterFail(with error: String) {
-        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        presentAlert(title: "Error", message: error)
     }
 }
 
@@ -301,8 +364,6 @@ extension RegisterViewController: LoginViewModelDelegate {
     }
     
     func didRegisterError(with error: String) {
-        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert,animated: true)
+        presentAlert(title: "Error", message: error)
     }
 }

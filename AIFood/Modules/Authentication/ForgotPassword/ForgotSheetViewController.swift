@@ -135,15 +135,16 @@ extension ForgotSheetViewController: ForgotSheetOptionViewProtocol {
 
 // MARK: - ActionButtonProtocol
 extension ForgotSheetViewController: ActionButtonProtocol {
-    func didTapPrimaryButton() {
-        guard let email = emailOption.detailLabel.text, !email.isEmpty else { return }
-        
-        let otpVC = OTPViewController(email: email, forgotPasswordViewModel: forgotPasswordViewModel)
-        otpVC.modalPresentationStyle = .fullScreen
-        present(otpVC, animated: false)
+    func didTapButton(ofType type: ActionButton.ButtonType) {
+        switch type {
+        case .primary:
+            guard let email = emailOption.detailLabel.text, !email.isEmpty else { return }
+            
+            let otpVC = OTPViewController(email: email, forgotPasswordViewModel: forgotPasswordViewModel)
+            otpVC.modalPresentationStyle = .fullScreen
+            present(otpVC, animated: false)
+        default:
+            break
+        }
     }
-    
-    func didTapForgotPasswordButton() {}
-    
-    func didTapRegisterButton() {}
 }

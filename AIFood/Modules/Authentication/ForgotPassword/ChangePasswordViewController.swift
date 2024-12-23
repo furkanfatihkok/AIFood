@@ -140,21 +140,21 @@ extension ChangePasswordViewController: NavigationBarProtocol {
 
 // MARK: - ActionButtonProtocol
 extension ChangePasswordViewController: ActionButtonProtocol {
-    func didTapPrimaryButton() {
-        let successVC = SuccessPasswordViewController()
-        
-        if let sheet = successVC.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.prefersGrabberVisible = true
-            sheet.prefersEdgeAttachedInCompactHeight = true
-            sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+    func didTapButton(ofType type: ActionButton.ButtonType) {
+        switch type {
+        case .primary:
+            let successVC = SuccessPasswordViewController()
+            
+            if let sheet = successVC.sheetPresentationController {
+                sheet.detents = [.medium()]
+                sheet.prefersGrabberVisible = true
+                sheet.prefersEdgeAttachedInCompactHeight = true
+                sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+            }
+            successVC.modalPresentationStyle = .pageSheet
+            present(successVC, animated: true)
+        default:
+            break
         }
-        successVC.modalPresentationStyle = .pageSheet
-        present(successVC, animated: true)
     }
-
-    
-    func didTapForgotPasswordButton() {}
-    
-    func didTapRegisterButton() {}
 }

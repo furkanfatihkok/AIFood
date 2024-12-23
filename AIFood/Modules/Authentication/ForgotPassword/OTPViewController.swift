@@ -58,7 +58,7 @@ final class OTPViewController: UIViewController {
     }()
     
     private lazy var resendButton: ActionButton = {
-        let button = ActionButton(title: "Resend", type: .register)
+        let button = ActionButton(title: "Resend", type: .tertiary)
         button.delegate = self
         return button
     }()
@@ -151,14 +151,15 @@ extension OTPViewController: OTPInputViewProtocol {
 
 // MARK: - ActionButtonProtocol
 extension OTPViewController: ActionButtonProtocol {
-    func didTapPrimaryButton() {
-        forgotPasswordViewModel?.verifyCode(inputCode: verificationCode)
-    }
-    
-    func didTapForgotPasswordButton() {}
-    
-    func didTapRegisterButton() {
-        requestNewVerificationCode()
+    func didTapButton(ofType type: ActionButton.ButtonType) {
+        switch type {
+        case .primary:
+            forgotPasswordViewModel?.verifyCode(inputCode: verificationCode)
+        case .tertiary:
+            requestNewVerificationCode()
+        default:
+            break
+        }
     }
 }
 
