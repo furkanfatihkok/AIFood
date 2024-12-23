@@ -7,8 +7,6 @@
 
 import UIKit
 
-// TODO: GENERİC hale getir burayı çünkü her vc de aynı buttonlar kullanılmıyor.
-
 protocol IconButtonProtocol: AnyObject {
     func didTapIconButton(_ button: IconButton<AnyObject>)
 }

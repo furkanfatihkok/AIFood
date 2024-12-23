@@ -23,6 +23,9 @@
 		029068952D142A380077318D /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 029068942D142A380077318D /* GoogleSignInSwift */; };
 		029068972D142B670077318D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 029068962D142B670077318D /* GoogleService-Info.plist */; };
 		0290689A2D1442F30077318D /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 029068992D1442F30077318D /* FacebookLogin */; };
+		02A046162D19536500DFF70F /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A046152D19536500DFF70F /* Validator.swift */; };
+		02A046192D19549100DFF70F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A046182D19549100DFF70F /* BaseViewController.swift */; };
+		02A0461B2D195CEA00DFF70F /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02A0461A2D195CEA00DFF70F /* ErrorLabel.swift */; };
 		02C44CC52D154B7B007F123F /* ForgotPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02C44CC42D154B7B007F123F /* ForgotPasswordViewModel.swift */; };
 		02C44CC82D155523007F123F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 02C44CC72D155523007F123F /* FirebaseFirestore */; };
 		02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02E109382D0861B5008D01F5 /* AppDelegate.swift */; };
@@ -69,6 +72,9 @@
 		026A23582D1301C2002AE2D2 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		027D019D2D15A59300135855 /* MailjetServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailjetServiceManager.swift; sourceTree = "<group>"; };
 		029068962D142B670077318D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		02A046152D19536500DFF70F /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
+		02A046182D19549100DFF70F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		02A0461A2D195CEA00DFF70F /* ErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLabel.swift; sourceTree = "<group>"; };
 		02C44CC42D154B7B007F123F /* ForgotPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewModel.swift; sourceTree = "<group>"; };
 		02E109352D0861B5008D01F5 /* AIFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AIFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		02E109382D0861B5008D01F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +167,23 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		02A046142D19535500DFF70F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				02A046152D19536500DFF70F /* Validator.swift */,
+				02A0461A2D195CEA00DFF70F /* ErrorLabel.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		02A046172D19548800DFF70F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				02A046182D19549100DFF70F /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		02C44CC62D155523007F123F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +213,7 @@
 			children = (
 				02E1094C2D08623F008D01F5 /* Application */,
 				02E1094D2D086261008D01F5 /* Resources */,
+				02A046142D19535500DFF70F /* Helpers */,
 				026144F12D0C07790047996E /* Extensions */,
 				02E109632D09CC67008D01F5 /* Constants */,
 				02E1096D2D0AC515008D01F5 /* UI Components */,
@@ -225,6 +249,7 @@
 		02E1094E2D08628B008D01F5 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				02A046172D19548800DFF70F /* Base */,
 				02E1094F2D086295008D01F5 /* Onboarding */,
 				026144F62D0C15550047996E /* Authentication */,
 				026A23572D1301B1002AE2D2 /* Home */,
@@ -454,6 +479,7 @@
 				02EAACBA2D1064F400EA68A5 /* OTPInputView.swift in Sources */,
 				02E109582D097766008D01F5 /* LoginViewController.swift in Sources */,
 				0210E7132D1191A8009AA6D2 /* SuccessPasswordViewController.swift in Sources */,
+				02A046192D19549100DFF70F /* BaseViewController.swift in Sources */,
 				02E109532D0976DF008D01F5 /* OnboardingModel.swift in Sources */,
 				025312D72D14052F009D576B /* LoginViewModel.swift in Sources */,
 				02E1093D2D0861B5008D01F5 /* OnboardingViewController.swift in Sources */,
@@ -463,6 +489,7 @@
 				02EAACB62D104B5600EA68A5 /* IconButton.swift in Sources */,
 				02E1096F2D0AC56B008D01F5 /* PrimaryButton.swift in Sources */,
 				02EAACAD2D10319B00EA68A5 /* ForgotSheetOptionView.swift in Sources */,
+				02A046162D19536500DFF70F /* Validator.swift in Sources */,
 				02E109652D09CC78008D01F5 /* Constants.swift in Sources */,
 				02E1097E2D0AF9B2008D01F5 /* ActionButton.swift in Sources */,
 				02E109392D0861B5008D01F5 /* AppDelegate.swift in Sources */,
@@ -473,6 +500,7 @@
 				02EAACA72D1007E300EA68A5 /* ForgotPasswordViewController.swift in Sources */,
 				02C44CC52D154B7B007F123F /* ForgotPasswordViewModel.swift in Sources */,
 				026144F52D0C124C0047996E /* String.swift in Sources */,
+				02A0461B2D195CEA00DFF70F /* ErrorLabel.swift in Sources */,
 				02EAACB82D1050D800EA68A5 /* OTPViewController.swift in Sources */,
 				026A23562D11C40D002AE2D2 /* RegisterViewModel.swift in Sources */,
 				02E109832D0AFEFA008D01F5 /* TitleLabel.swift in Sources */,

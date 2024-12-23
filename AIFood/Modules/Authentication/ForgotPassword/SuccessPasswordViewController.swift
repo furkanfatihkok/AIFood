@@ -50,11 +50,12 @@ final class SuccessPasswordViewController: UIViewController {
 
 // MARK: - ActionButtonProtocol
 extension SuccessPasswordViewController: ActionButtonProtocol {
-    func didTapPrimaryButton() {
-        print("vverify button to login VC")
+    func didTapButton(ofType type: ActionButton.ButtonType) {
+        switch type {
+        case .primary:
+            print("vverify button to login VC")
+        default:
+            break
+        }
     }
-    
-    func didTapForgotPasswordButton() {}
-    
-    func didTapRegisterButton() {}
 }

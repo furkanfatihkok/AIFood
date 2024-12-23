@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class ForgotPasswordViewController: UIViewController {
+final class ForgotPasswordViewController: BaseViewController {
     
     // MARK: - Properties
     private let forgotPasswordViewModel: ForgotPasswordViewModel
@@ -115,25 +115,26 @@ final class ForgotPasswordViewController: UIViewController {
 
 // MARK: - ActionButtonProtocol
 extension ForgotPasswordViewController: ActionButtonProtocol {
-    func didTapPrimaryButton() {
-        emailErrorLabel.isHidden = true
-        
-        let email = emailTextField.text ?? ""
-        
-        if email.isEmpty {
-            emailErrorLabel.text = "Email field cannot be empty."
-            emailErrorLabel.isHidden = false
-        } else if !email.isValidEmail() {
-            emailErrorLabel.text = "Please enter a valid email address."
-            emailErrorLabel.isHidden = false
-        } else {
-            forgotPasswordViewModel.checkIfEmailExists(email: email)
+    func didTapButton(ofType type: ActionButton.ButtonType) {
+        switch type {
+        case .primary:
+            emailErrorLabel.isHidden = true
+            
+            let email = emailTextField.text ?? ""
+            
+            if email.isEmpty {
+                emailErrorLabel.text = "Email field cannot be empty."
+                emailErrorLabel.isHidden = false
+            } else if !email.isValidEmail() {
+                emailErrorLabel.text = "Please enter a valid email address."
+                emailErrorLabel.isHidden = false
+            } else {
+                forgotPasswordViewModel.checkIfEmailExists(email: email)
+            }
+        default:
+            break
         }
     }
-    
-    func didTapForgotPasswordButton() {}
-    
-    func didTapRegisterButton() {}
 }
 
 // MARK: - EmailValidationDelegate
@@ -157,8 +158,6 @@ extension ForgotPasswordViewController: EmailValidationDelegate {
     }
     
     func didFailWithError(_ error: String) {
-        let alert = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        presentAlert(title: "Error", message: error)
     }
 }
